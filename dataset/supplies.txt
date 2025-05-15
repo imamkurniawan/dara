@@ -1,0 +1,15 @@
+obat
+infus
+mri
+usg
+ct scan
+kursi roda
+wastafel
+sprei
+Kasur
+wifi
+makanan
+rontgen
+ac
+perban
+suntik

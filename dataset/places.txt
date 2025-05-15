@@ -1,0 +1,58 @@
+administrasi
+apotik
+apotek
+bank darah
+bpjs kesehatan
+cs
+customer service
+depo farmasi
+farmasi
+graha
+hemodialisa
+hyperbaric
+icu
+igd
+irna
+kamar
+laboratorium
+lift
+lobby
+loket
+manajemen
+masjid
+mcu
+mushalla
+nicu
+okupasi
+parkir
+pendaftaran eksekutif
+picu
+poli
+poli anak
+poli bedah
+poli eksekutif
+poli gigi
+poli khusus
+poli kulit
+poli rehabilitasi
+poli urologi
+radiologi
+reservasi
+rsud kota mataram
+ruang eksekutif
+ruang isolasi
+ruang nifas
+ruang rawat inap
+ruang tunggu
+ruang vip
+ruangan
+stroke centre
+toilet
+ugd
+urologi
+usg
+vip
+vvip
+wc
+zona hijau
+zona kuning

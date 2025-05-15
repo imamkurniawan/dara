@@ -1,0 +1,5 @@
+vps mysqlserver
+host 		: 34.101.166.216
+user		: flask
+password	: D4r4_123456
+databases	: dara_db

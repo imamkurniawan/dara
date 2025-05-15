@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Analisis Rumah Sakit</title>
+  <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  
+</head>
+<body>
+  <!-- login  -->
+  {% if session.user == 'admin' %}
+  <div class="card-user">
+    <div class="user-info">
+      <div class="username"><i class="fas fa-user icon-green fa-lg"></i> Admin</div>          
+    </div>
+    <div class="user-info">
+      <div class="status">Online</div>
+    </div>
+    <a href="logout"><button class="btn btn-logout">Logout</button></a>
+    <!-- Ganti button di atas dengan ini jika belum login -->
+    <!-- <button class="btn btn-login">Login</button> -->
+  </div>
+  {% else %}
+  <div class="card-user">
+    <div class="user-info">
+      <div class="username"></div>
+    </div>
+    <div class="user-info">
+      <div class="status">Offline</div>
+    </div>
+    <a href="login"><button class="btn btn-login">Login</button></a>
+    <!-- Ganti button di atas dengan ini jika belum login -->
+    <!-- <button class="btn btn-login">Login</button> -->
+  </div>
+  {% endif %}
+  <!-- end login -->
+
+  <div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- <img src="{{ url_for('static', filename='images/logo.png') }}" width="100%"> -->
+      <a href="/"><h2>Dashboard</h2></a>
+      <ul>
+        <li><a href="overview"><i class="fas fa-pie-chart"></i> Overview</a></li>
+        <li><a href="pengaduan"><i class="fas fa-bullhorn"></i> Data Pengaduan</a></li>
+        <li><a href="filter_ulasan"><i class="fas fa-comments"></i> Data Ulasan</a></li>        
+        <li><a href="prediksi"><i class="fas fa-smile-wink"></i> Topik dan Sentimen</a></li>
+        <li><a href=""><i class="fas fa-chart-line"></i> Laporan Interaktif</a></li>
+        <li><a href="persons"><i class="fas fa-user"></i> Persons</a></li>
+        <li><a href="places"><i class="fas fa-building"></i> Places</a></li> 
+        {% if session.user == 'admin' %}  
+          <li><a href="reviews"><i class="fas fa-comments icon-red"></i> <p class="icon-red">Manajemen Data</p></a></li>
+          <li><a href="panel"><i class="fas fa-cogs icon-red"></i> <p class="icon-red">Pengaturan</p></a></li>         
+        {% endif %}
+        <li><a href=""><i class="far fa-file-alt"></i> Bantuan & Dokumentasi</a></li>
+      </ul>
+    </div>
+    <!-- end of Sidebar -->
+
+    <!-- Main Content -->
+    <div class="main-content">    
+      <div class="navbar">
+        <h2>Ikhtisar Pengaduan Internal</h2>
+      </div> <br>
+      <div class="cards">
+        <div class="review-card icon-red">
+          <h3>Jumlah Pengaduan</h3>
+          <h1>{{ data.total_pengaduan_internal }}</h1>
+        </div>
+        <div class="review-card icon-green"> 
+          <h3>Pengaduan Selesai</h3>
+          <h1>{{ data.total_pengaduan_selesai }}</h1>
+        </div>
+        <div class="review-card icon-red">
+          <h3>Pengaduan 2025</h3>
+          <h1>{{ data.total_pengaduan_internal_terkini }}</h1>
+        </div>
+        <div class="review-card">
+          <h3>Pengaduan masih proses</h3>
+          <h1>{{ data.total_pengaduan_on_proses }}</h1>
+        </div>
+      </div> <!-- end of cards pengaduan internal -->
+      <br>
+      <div class="chart-section">
+        <div class="cards">
+          <div class="review-card icon-grey">
+            <h4>Sumber Pengaduan</h4>
+            <p class="icon-grey"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus dolorem, magni qui inventore maiores explicabo at deleniti enim. Veniam magni blanditiis placeat labore exercitationem pariatur vero aperiam omnis consequatur similique? </p>
+          </div>
+          <div class="card">
+            <canvas id="sumber-Pengaduan-Chart" style="margin-top: 10px; width: 100%;"></canvas>
+          </div>
+          <div class="card"></div>
+          <div class="card"></div>
+        </div>
+      </div> <br>
+
+      <!-- navbar google maps review -->  
+      <div class="navbar">
+        <h2>Ikhtisar Ulasan Google Maps</h2>
+      </div> <br>
+      <!-- Cards -->
+      <div class="cards">
+        <div class="review-card icon-green">
+          <h3>Jumlah Ulasan</h3>
+          <h1>{{ data.total_reviews }}</h1>
+        </div>
+        <div class="review-card icon-green">
+          <h3>Average Rating</h3>
+          <h1> {{ data.average_rating }}/5.0 </h1>
+        </div>
+        <div class="review-card icon-green">
+          <h3>Total Pengaduan</h3>
+          <h1> {{ data.total_pengaduan }} </h1>
+        </div>
+      </div> <br>
+
+      <!-- Chart Section -->
+      <div class="chart-section">
+        <div class="cards">
+          <div class="card">
+              <h5 class="icon-grey" style="text-align: left;">Rating Google</h5>
+              <canvas id="my-Total-Rating-Chart" style="margin-top: 20px; height: 100%; width: 100%;"></canvas>
+          </div>
+          <div class="review-card icon-grey">
+                <p>Rating ini dihitung berdasarkan semua ulasan yang diterima, memperhitungkan jumlah dan kualitas ulasan untuk memberikan gambaran keseluruhan tentang pengalaman pengguna.</p>
+          </div>
+          
+          <div class="card">
+              <h5 class="icon-grey" style="text-align: left;">Local Guide Reviewer</h5>
+              <canvas id="my-LocalGuide-Chart" style="margin-top: 20px;"></canvas>
+          </div>
+          <div class="review-card">
+              <p>Ulasan dari Local Guide membantu memberikan gambaran yang lebih lengkap dan mendetail tentang suatu lokasi, sehingga sering dianggap lebih terpercaya</p>
+          </div>
+          <div class="card"></div>
+        </div> <br>
+
+        <div class="cards">
+          <div class="card">
+            <h4>Ulasan pertahun</h4>
+            <canvas id="my-Annual-Review-Chart" style="margin-top: 20px; height: 200px; width: 100%;"></canvas>
+          </div>
+          <div class="card">
+            <h4>Rating pertahun</h4>
+            <canvas id="my-Annual-Rating-Chart" style="margin-top: 20px; height: 200px; width: 100%;"></canvas>
+          </div>
+        </div>
+                  
+      </div> 
+      <!-- end of chart-section -->
+
+      
+
+
+      <!-- Chart Section -->
+      <br>
+      <div class="chart-section">
+        <h4>Kata yang banyak muncul dalam ulasan</h4>
+        <p>Dalam analisis ulasan Google Maps, kata-kata yang sering muncul memberikan wawasan penting mengenai topik atau aspek yang paling banyak dibicarakan oleh pengguna. Untuk memvisualisasikan data ini, digunakan wordcloud, yaitu representasi grafis di mana ukuran kata mencerminkan frekuensi kemunculannya dalam ulasan.</p>
+        <div class="cards">          
+          <div class="card-description">
+            <img src="{{ url_for('static', filename='images/combined_wordcloud.png') }}" alt="combine_wordcloud">
+          </div>          
+        </div>
+        <h4>Tempat yang paling sering dibicarakan</h4>
+        <div class="cards">
+          <div class="card-description">
+            <img src="{{ url_for('static', filename='images/places_wordcloud.png') }}" alt="combine_wordcloud">
+          </div>
+        </div>
+      </div>
+      
+    </div> <!-- end main-content -->
+  </div> <!-- end container -->
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>© 2025 Dashboard Analisis Ulasan Rumah Sakit Kota Mataram</p>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="{{ url_for('static', filename='js_chart/chart_overview.js') }}"></script>
+</body>
+</html>

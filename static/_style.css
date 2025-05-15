@@ -1,0 +1,381 @@
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  body {
+    background-color: #f4f7fc;
+    color: #333;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  
+  .container {
+    display: flex;
+    min-height: 100vh;
+  }
+  
+  /* Sidebar Style */
+  .sidebar {
+    width: 250px;
+    background-color: #2d3a54;
+    color: #fff;
+    padding: 20px 10px;
+  }
+
+  .sidebar a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .sidebar h2 {
+    text-align: center;
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+  
+  .sidebar ul {
+    list-style: none;
+  }
+  
+  .sidebar ul li {
+    padding: 15px 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .sidebar ul li:hover {
+    background-color: #3e4b68;
+  }
+  
+  .sidebar ul li.active {
+    background-color: #576b95;
+  }
+  
+  .sidebar ul li a {
+    text-decoration: none;
+    color: #fff;
+    display: flex;
+    align-items: center;
+  }
+  
+  .sidebar ul li a i {
+    margin-right: 10px;
+  }
+  
+  /* Main Content */ 
+
+  .main-content {
+    flex: 1;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    margin: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .main-content h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+  
+  .main-content .cards {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .card {
+    flex: 1;
+    min-width: 200px;
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #f4f7fc00;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: 0.3s ease;
+    text-align: center;
+  }
+  .card-description {
+    flex: 1;
+    min-width: 200px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #f4f7fc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: 0.3s ease;
+    text-align: left;
+  }
+
+  .card-description img {
+    width: 100%;
+  }
+  
+  .card:hover {
+    background-color: #eef2f8;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+  
+  .card h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .card p {
+    font-size: 14px;
+    color: #666;
+  }
+
+  /* Card User untuk tampilan login logout */
+
+  .card-user {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px 15px;
+    font-family: Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 1000;
+  }
+  
+  .card-user .user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .card-user .user-info .username {
+    font-weight: bold;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .card-user .user-info .status {
+    font-size: 12px;
+    color: #666;
+  }
+  
+  .card-user .btn {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .card-user .btn-logout {
+    background-color: #ff4d4f;
+    color: #fff;
+  }
+  
+  .card-user .btn-logout:hover {
+    background-color: #d9363e;
+  }
+  
+  .card-user .btn-login {
+    background-color: #4caf50;
+    color: #fff;
+  }
+  
+  .card-user .btn-login:hover {
+    background-color: #3b8e41;
+  }
+  
+  .icon-red {
+    color: #d9363e;
+  }
+
+  .icon-grey {
+    color: #666;
+  }
+
+  .icon-green {
+    color: #3b8e41;
+  }
+  .icon-yellow {
+    color: yellow;
+  }
+
+  /* Top Navigation */
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .navbar .search-bar {
+    flex: 1;
+    margin: 0 20px;
+  }
+  
+  .navbar .search-bar input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .navbar .user-profile {
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbar .user-profile img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 10px 20px;
+    background-color: #2d3a54;
+    color: #fff;
+    margin-top: 20px;
+    border-radius: 0 0 0 0;
+  }
+  
+  .footer p {
+    font-size: 14px;
+  }
+
+/* Bagian utama */
+.reviews-section {
+  text-align: center;
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.reviews-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.review-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 300px;
+  text-align: left;
+  opacity: 0; /* Mulai tidak terlihat */
+  transform: translateY(20px); /* Mulai di bawah */
+  animation: fadeIn 1s ease forwards; /* Animasi masuk */
+}
+
+/* Tambahkan animasi berbeda untuk setiap kartu */
+.review-card:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.review-card:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+.avatar {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  margin-bottom: 10px;
+}
+
+.review-card h3 {
+  font-size: 1.2em;
+  margin: 10px 0;
+}
+
+.review-card p {
+  color: #555;
+}
+
+/* Efek hover */
+.review-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+/* Animasi fade-in */
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column;
+    }
+  
+    .sidebar {
+      width: 100%;
+      text-align: center;
+      padding: 15px 0;
+    }
+  
+    .sidebar ul li {
+      display: inline-block;
+      margin: 0 10px;
+    }
+  
+    .main-content {
+      margin: 10px;
+      padding: 10px;
+    }
+  
+    .navbar {
+      flex-wrap: wrap;
+    }
+  
+    .navbar .search-bar {
+      margin: 10px 0;
+      width: 100%;
+    }
+  
+    .cards {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .card {
+      width: 100%;
+      max-width: 300px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .navbar {
+      flex-direction: column;
+    }
+  
+    .cards {
+      flex-direction: column;
+    }
+  
+    .card {
+      width: 90%;
+    }
+  }
+  

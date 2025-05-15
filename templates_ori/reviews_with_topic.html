@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Analisis Rumah Sakit</title>
+  <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <!--
+  <script src="https://cdn.tailwindcss.com"></script>
+  -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <!-- login  -->
+  {% if session.user == 'admin' %}
+  <div class="card-user">
+    <div class="user-info">
+      <div class="username"><i class="fas fa-user icon-green fa-lg"></i> Admin</div>          
+    </div>
+    <div class="user-info">
+      <div class="status">Online</div>
+    </div>
+    <a href="logout"><button class="btn btn-logout">Logout</button></a>
+    <!-- Ganti button di atas dengan ini jika belum login -->
+    <!-- <button class="btn btn-login">Login</button> -->
+  </div>
+  {% else %}
+  <div class="card-user">
+    <div class="user-info">
+      <div class="username"></div>
+    </div>
+    <div class="user-info">
+      <div class="status">Offline</div>
+    </div>
+    <a href="login"><button class="btn btn-login">Login</button></a>
+    <!-- Ganti button di atas dengan ini jika belum login -->
+    <!-- <button class="btn btn-login">Login</button> -->
+  </div>
+  {% endif %}
+  <!-- end login -->
+   
+  <div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- <img src="{{ url_for('static', filename='images/logo.png') }}" width="100%"> -->
+      <a href="/"><h2>Dashboard</h2></a>
+      <ul>
+        <li><a href="overview"><i class="fas fa-pie-chart"></i> Overview</a></li>
+        <li><a href="pengaduan"><i class="fas fa-bullhorn"></i> Data Pengaduan</a></li>
+        <li><a href="filter_ulasan"><i class="fas fa-comments"></i> Data Ulasan</a></li>        
+        <li><a href="prediksi"><i class="fas fa-smile-wink"></i> Topik dan Sentimen</a></li>
+        <li><a href=""><i class="fas fa-chart-line"></i> Laporan Interaktif</a></li>
+        <li><a href="persons"><i class="fas fa-user"></i> Persons</a></li>
+        <li><a href="places"><i class="fas fa-building"></i> Places</a></li> 
+        {% if session.user == 'admin' %}  
+          <li><a href="reviews"><i class="fas fa-comments icon-red"></i> <p class="icon-red">Manajemen Data</p></a></li>
+          <li><a href="panel"><i class="fas fa-cogs icon-red"></i> <p class="icon-red">Pengaturan</p></a></li>         
+        {% endif %}
+        <li><a href=""><i class="far fa-file-alt"></i> Bantuan & Dokumentasi</a></li>
+      </ul>
+    </div>
+    <!-- end of Sidebar -->
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <div class="navbar">
+        <h2>Ulasan Google Maps</h2>
+      </div> <br>
+      
+      <div class="chart-section">
+        <div class="cards">
+          <div class="card-description">
+            <b>Ulasan masyarakat</b> dengan filter <br>
+            Tahun : <b>"{{ filter.thn }}"</b>;
+            Topik : <b>"{{ filter.topik }}"</b>;
+            Sentimen : <b>"{{ filter.sentimen }}" </b> <br>
+            <b>{{ filter.count }}</b> ulasan ditemukan... <br><br>
+            <i class="fa fa-arrow-circle-left"></i><a href="filter_ulasan"> Kembali ke halaman Filter </a>
+          </div>
+          <div class="card-description"></div>
+          
+          <div class="card-description">     
+              <h4>Topik</h4>       
+              <canvas id="my-Topic-Chart" style="height: 100%;"></canvas>
+          </div>
+          <div class="card-description">
+            <h4>Sentimen</h4>
+            <canvas id="my-Sentiment-Review-Chart" style="margin-top: 10px;"></canvas>
+          </div>
+          
+        </div>                
+      </div> <br>
+
+
+      <!-- Chart Section -->
+      <div class="chart-section">           
+      {% for group in data %}
+        <h3><img src="{{ url_for('static', filename='reviewer_thumbnail/' ~ group.main_data.reviewer_id ~ '.jpg') }}" alt="Thumbnail" width="48">
+          {{ group.main_data.name }}
+          {% if group.main_data.localGuide %}
+            <i class="fas fa-check-square"></i>
+          {% endif %}
+        </h3>        
+        {% if group.main_data.localGuide %}
+          Local Guide <br>
+        {% endif %}
+        Reviewer ID : <a href="{{ group.main_data.link }}" target="_blank">{{ group.main_data.reviewer_id }} </a><br>
+
+        Rating :  
+          {% for _ in range(group.main_data.rating) %}
+            <i class="fas fa-star"></i>
+          <!-- loop topic dan sentimen -->
+          {% endfor %}
+          <br>
+          Topik :
+              {% for prediction in group.predicted_data %}
+                {% if prediction.predicted_sentiment == 'positif' %}
+                    <i class="fas fa-grin-hearts icon-green"></i>
+                {% elif prediction.predicted_sentiment == 'negatif' %}
+                    <i class="fas fa-angry icon-red"></i>
+                {% else %}
+                  <i class="fas fa-smile icon-grey"></i>
+                {% endif %}
+                <b>{{ prediction.predicted_topic }}</b>
+                {{ prediction.predicted_sentiment }}
+                ({{ prediction.count | int }}) ;
+              {% endfor %}
+          <br>          
+        Ulasan : <br>
+        {{ group.main_data.snippet }} <br>          
+              {% for place in group.places_data %}
+              <i class="fas fa-building"></i>
+                <b>{{ place.places }}</b> ({{ place.places_count | int }}) ; 
+              {% endfor %}          
+              {% for person in group.persons_data %}
+              <i class="fas fa-user"></i>
+                <b>{{ person.persons }}</b> ({{ person.persons_count | int }}) ; 
+              {% endfor %}
+        <br>
+        <i class="fas fa-calendar"></i>
+        {{ group.main_data.tgl_ulasan | humanize_date }} ({{ group.main_data.thn_ulasan }}) | 
+        <i class="fas fa-thumbs-up"></i>
+        {{ group.main_data.likes }} Suka <br><br>
+         
+      {% endfor %}
+  
+        
+      </div> <!-- chart-section -->
+    </div> <!-- main-content -->
+  </div> <!-- container -->
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>© 2025 Dashboard Analisis Rumah Sakit. Semua Hak Dilindungi.</p>
+  </div>
+
+<script>
+    // Variabel dari Jinja
+    const thn = {{ filter.thn | tojson }}; 
+    const topik = {{ filter.topik | tojson }};
+    const sentimen = {{ filter.sentimen | tojson }};
+    // URL endpoint sentimen
+    const url_sentimen = `/chart_sentimen_ulasan_filter?thn=${encodeURIComponent(thn)}&topik=${encodeURIComponent(topik)}&sentimen=${encodeURIComponent(sentimen)}`;
+    // URL endpoint topik
+    const url_topik = `/chart_topik_ulasan_filter?thn=${encodeURIComponent(thn)}&topik=${encodeURIComponent(topik)}&sentimen=${encodeURIComponent(sentimen)}`;
+</script>
+<script src="{{ url_for('static', filename='js_chart/chart_ulasan_filtered.js') }}"></script>
+
+</body>
+</html>

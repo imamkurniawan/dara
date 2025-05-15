@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <!-- basic -->
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <!-- mobile metas -->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+      <!-- site metas -->
+      <title>DARA - Dashboard Analisis Respons dan Aspirasi</title>
+      <meta name="keywords" content="">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+      <!-- site icon -->
+      <link rel="icon" href="{{ url_for('static', filename='images/fevicon.png') }}" type="image/png" />
+      <!-- bootstrap css -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" />
+      <!-- site css -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+      <!-- responsive css -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}" />
+      <!-- color css -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/colors.css') }}" />
+      <!-- select bootstrap -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-select.css') }}" />
+      <!-- scrollbar css -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/perfect-scrollbar.css') }}" />
+      <!-- custom css -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}" />
+      <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      <![endif]-->
+   </head>
+   <body class="dashboard dashboard_1">
+      <div class="full_container">
+
+               <!-- dashboard inner -->
+               <div class="midde_cont">
+                  <div class="container-fluid">
+                     <div class="row column_title">
+                        <div class="col-md-12">
+                           <div class="page_title">
+                              <h2>Lacak Pengaduan</h2>
+                           </div>
+                        </div>
+                     </div>
+                     
+                     <!-- Testi Rows -->
+                     <div class="row column3">                        
+                        <!-- pengaduan -->
+                        <div class="col-md-12">
+                           <div class="dash_blog">
+                              <div class="dash_blog_inner">
+                                 <div class="list_cont">
+                                    <h4 class="orange_color">Pengaduan Dalam Proses</h4>
+                                    <p>
+                                       keluarga Pasien komplain kepada perawat di ruang perawatan 3A, keluarga pasien minta tolong untuk bantu ganti pampers pasien, karena hanya 1 org yg menemani pasien, tapi pihak perawat menyuruh untuk ganti sendiri, apa itu emang diluar tugas perawat apa gimana, susah sekali dimintain tolong.
+                                    </p>
+                                 </div>
+                                 <div class="msg_list_main">
+                                    <ul class="msg_list">
+                                       <li>
+                                          <span>
+                                             <!-- <img src="https://cdn-icons-png.flaticon.com/512/219/219988.png" alt=""> -->
+                                              <img src="https://cdn-icons-png.flaticon.com/512/219/219969.png" alt="">
+                                          </span>
+                                          <span>
+                                          <span class="name_user">
+                                             Anda
+                                          </span>    
+                                          <p> 
+                                             Mengirimkan pengaduan
+                                          </p>
+                                          <span class="time_ago orange_color"> 7 Mei 2025  16:15:00 </span>
+                                          </span>
+                                       </li>
+                                       <li>
+                                          <span>
+                                             <img src="https://cdn-icons-png.flaticon.com/512/219/219987.png" alt="">
+                                          </span>
+                                          <span>
+                                          <span class="name_user">
+                                             Humas RSUD Kota Mataram
+                                          </span>    
+                                          <ul>
+                                             <li>
+                                                <span class="orange_color"> 7 Mei 2025  16:32:00 </span> <br>
+                                                <span>Pengaduan disetujui oleh Humas</span>
+                                             </li>
+                                             <li>
+                                                <span class="orange_color"> 7 Mei 2025  16:32:00 </span> <br>
+                                                <span>Pengaduan telah diteruskan ke unit terkait (IRNA 3A)</span>
+                                             </li>
+                                             <li>
+                                                <span class="orange_color"> 7 Mei 2025  16:32:00 </span> <br>
+                                                <span>
+                                                   Pengaduan sudah diverifikasi oleh unit yang bersangkutan
+                                                </span>
+                                             </li>
+                                             <li>
+                                                <span class="orange_color"> 7 Mei 2025  16:32:00 </span> <br>
+                                                <span>
+                                                   Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non molestias aliquam atque magni hic iusto aperiam recusandae ipsa fuga corporis, asperiores ab amet voluptatum ipsum sed dicta! Quod, libero eum.
+                                                </span>
+                                             </li>
+                                          </ul>
+                                          
+                                          </span>
+                                       </li>
+                                  
+                                    </ul>
+                                 </div> <!-- list-main -->
+                                 <div class="read_more">
+                                    <div class="center"><a class="main_bt read_bt" href="#">Read More</a></div>
+                                 </div>
+                              </div> <!-- dash-blog-inner -->
+                           </div> <!-- dash-blog -->
+                        </div> <!-- COL-MD-12 -->
+                        <!-- end pengaduan -->
+                     </div>
+                     <!-- End Testi Rows -->
+
+                  </div> 
+                  <!-- end container-fluid -->
+
+                  <!-- footer -->
+                  <div class="container-fluid">
+                     <div class="footer">
+                        <p>Dashboard Analisis Respons dan Aspirasi (DARA) <br>
+                        Copyright © 2025 by DARA TEAM. All rights reserved. </p>
+                     </div>
+                  </div>
+               </div>
+               <!-- end dashboard inner -->
+            
+         
+      </div>
+      <!-- jQuery -->
+      <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+
+      <!-- wow animation -->
+      <script src="{{ url_for('static', filename='js/animate.js') }}"></script>
+      
+      <!-- select country -->
+      <script src="{{ url_for('static', filename='js/bootstrap-select.js') }}"></script>
+      
+      <!-- owl carousel -->
+      <script src="{{ url_for('static', filename='js/owl.carousel.js') }}"></script>
+      
+      <!-- chart js -->
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+   
+      <script src="js/Chart.min.js"></script>
+      <script src="js/Chart.bundle.min.js"></script>
+      <script src="js/utils.js"></script>
+      <script src="js/analyser.js"></script>
+      <!-- nice scrollbar -->
+      <script src="{{ url_for('static', filename='js/perfect-scrollbar.min.js') }}"></script>
+   
+      <script>
+         var ps = new PerfectScrollbar('#sidebar');
+      </script>
+      <!-- custom js -->
+      <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/chart_custom_style1.js') }}"></script>
+      
+   </body>
+</html>

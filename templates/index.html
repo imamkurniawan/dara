@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <!-- basic -->
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <!-- mobile metas -->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+      <!-- site metas -->
+      <title>DARA - Dashboard Analisis Respons dan Aspirasi</title>
+      <meta name="keywords" content="">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+      <!-- site icon -->
+      <link rel="icon" href="{{ url_for('static', filename='images/fevicon.png') }}" type="image/png" />
+      <!-- bootstrap css -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" />
+      <!-- site css -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+      <!-- responsive css -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}" />
+      <!-- color css -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/colors.css') }}" />
+      <!-- select bootstrap -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-select.css') }}" />
+      <!-- scrollbar css -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/perfect-scrollbar.css') }}" />
+      <!-- custom css -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}" />
+      <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      <![endif]-->
+   </head>
+   <body class="dashboard dashboard_1">
+      <div class="full_container">
+         <div class="inner_container">
+            <!-- Sidebar  -->
+            <nav id="sidebar">
+               <div class="sidebar_blog_1">
+                  <div class="sidebar-header">
+                     <div class="logo_section">
+                        <a href="/"><img class="logo_icon img-responsive" src="{{ url_for('static', filename='images/logo/logo_icon.png') }}" alt="#" /></a>
+                     </div>
+                  </div>
+                  <div class="sidebar_user_info">
+                     <div class="icon_setting"></div>
+                     <div class="user_profle_side">
+                        <div class="user_img"><img class="img-responsive" src="{{ url_for('static', filename='images/layout_img/user_img.jpg') }}" alt="#" /></div>
+                        <div class="user_info">
+                           <h6>{{ session['status'] }}</h6>
+                           <p><span class="online_animation"></span> Online</p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="sidebar_blog_2">
+                  <h4><a href="/" class="yellow_color">DARA Dashboard</a></h4>
+                  <ul class="list-unstyled components">                     
+                     <li><a href="overview"><i class="fa fa-dashboard orange_color"></i> <span>Overview</span></a></li>
+                     <li class="active">
+                        <a href="#pengaduan_page" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-commenting yellow_color"></i> <span>Pengaduan</span></a>
+                        <ul class="collapse list-unstyled" id="pengaduan_page">
+                           <li>
+                              <a href="pengaduan">> <span>Data Pengaduan</span></a>
+                           </li>
+                           <li>
+                              <a href="persons_pengaduan">> <span>Persons</span></a>
+                           </li>
+                           <li>
+                              <a href="places_pengaduan">> <span>Places</span></a>
+                           </li>
+                        </ul>
+                     </li>
+                     <li class="active">
+                        <a href="#ulasan_page" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-map blue1_color"></i> <span>Ulasan</span></a>
+                        <ul class="collapse list-unstyled" id="ulasan_page">
+                           <li>
+                              <a href="filter_ulasan">> <span>Data Ulasan</span></a>
+                           </li>
+                           <li>
+                              <a href="persons">> <span>Persons</span></a>
+                           </li>
+                           <li>
+                              <a href="places">> <span>Places</span></a>
+                           </li>
+                        </ul>
+                     </li>
+                     <li> 
+                        <a href="#laporan_interaktif"data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-line-chart yellow_color"></i> <span>Laporan Interaktif</span></a>
+                        <ul class="collapse list-unstyled" id="laporan_interaktif">
+                           <li>
+                              <a href="analisis_topik_ulasan">> <span>Analisis Topik Ulasan</span></a>
+                           </li>
+                           <li>
+                              <a href="monev_pengaduan_tahunan">> <span>Monev Pengaduan Tahunan</span></a>
+                           </li>
+                        </ul>
+                     </li>
+                     <li>
+                        <a href="#manajemen_data" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-database purple_color2"></i> <span>Manajemen Data</span></a>
+                        <ul class="collapse list-unstyled" id="manajemen_data">
+                           <li>
+                              <a href="entry_pengaduan">> <span>Entry Data Pengaduan</span></a>
+                           </li>
+                           <li>
+                              <a href="entry_ulasan">> <span>Entry Data Ulasan</span></a>
+                           </li>
+                           <li>
+                              <a href="entry_unit">> <span>Data Unit dan Ruangan</span></a>
+                           </li>
+                        </ul>
+                     </li>
+                     <li>
+                        <a href="#bantuan" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-diamond green_color"></i> <span>Bantuan</span></a>
+                        <ul class="collapse list-unstyled" id="bantuan">
+                           <li>
+                              <a href="about">> <span>Tentang Kami</span></a>
+                           </li>
+                           <li>
+                              <a href="dokumentasi">> <span>Dokumentasi</span></a>
+                           </li>
+                           <li>
+                              <a href="faq">> <span>FAQ</span></a>
+                           </li>
+                        </ul>
+                     </li>
+                     <li><a href="settings"><i class="fa fa-cog yellow_color"></i> <span>Settings</span></a></li>
+                     <li><a href="logout"><i class="fas fa-sign-out-alt red_color"></i> <span>Logout</span></a></li>
+                  </ul>
+               </div>
+            </nav>
+            <!-- end sidebar -->
+            <!-- right content -->
+            <div id="content">
+               <!-- topbar -->
+               <div class="topbar">
+                  <nav class="navbar navbar-expand-lg navbar-light">
+                     <div class="full">
+                        <button type="button" id="sidebarCollapse" class="sidebar_toggle"><i class="fa fa-bars"></i></button>
+                        <div class="logo_section">
+                           <a href="/"><img class="img-responsive" src="{{ url_for('static', filename='images/logo/logo.png') }}" alt="#" /></a>
+                        </div>
+                        <div class="right_topbar">
+                           <div class="icon_info">
+                              <!--
+                              <ul>
+                                 <li><a href="#"><i class="fa fa-bell-o"></i><span class="badge">2</span></a></li>
+                                 <li><a href="#"><i class="fa fa-question-circle"></i></a></li>
+                                 <li><a href="#"><i class="fa fa-envelope-o"></i><span class="badge">3</span></a></li>
+                              </ul>
+                              -->
+                              <ul class="user_profile_dd">
+                                 <li>
+                                    <a class="dropdown-toggle" data-toggle="dropdown"><img class="img-responsive rounded-circle" src="{{ url_for('static', filename='images/layout_img/user_img.jpg') }}" alt="#" /><span class="name_user">{{ session['user'] }}</span></a>
+                                    <div class="dropdown-menu">
+                                       <a class="dropdown-item" href="profile.html">My Profile</a>
+                                       <a class="dropdown-item" href="settings.html">Settings</a>
+                                       <a class="dropdown-item" href="help.html">Help</a>
+                                       <a class="dropdown-item" href="#"><span>Log Out</span> <i class="fa fa-sign-out"></i></a>
+                                    </div>
+                                 </li>
+                              </ul>
+                           </div>
+                        </div>
+                     </div>
+                  </nav>
+               </div>
+               <!-- end topbar -->
+               <!-- dashboard inner -->
+               <div class="midde_cont">
+                  <div class="container-fluid">
+                     <div class="row column_title">
+                        <div class="col-md-12">
+                           <div class="page_title">
+                              <h2>DARA Dashboard > Home</h2>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="row column1">
+                        <div class="col-md-6 col-lg-3">
+                           <div class="full counter_section margin_bottom_30 blue2_bg">
+                              <div class="couter_icon">
+                                 <div> 
+                                    <i class="fa fa-map"></i>
+                                 </div>
+                              </div>
+                              <div class="counter_no">
+                                 <div>
+                                    <p class="total_no"><span class="white_color">{{ stat[0] }}</span></p>
+                                    <p class="head_couter white_color"><span class="white_color">Ulasan Google Maps</span></p>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                           <div class="full counter_section margin_bottom_30 yellow_bg">
+                              <div class="couter_icon">
+                                 <div> 
+                                    <i class="fa fa-star-o"></i>
+                                 </div>
+                              </div>
+                              <div class="counter_no">
+                                 <div>
+                                    <p class="total_no"><span class="white_color">{{ stat[1] }}</span></p>
+                                    <p class="head_couter"><span class="white_color">Average Rating</span></p>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                           <div class="full counter_section margin_bottom_30 green_bg">
+                              <div class="couter_icon">
+                                 <div> 
+                                    <i class="fa fa-commenting"></i>
+                                 </div>
+                              </div>
+                              <div class="counter_no">
+                                 <div>
+                                    <p class="total_no"><span class="white_color">{{ stat_pengaduan.jml_pengaduan }}</span></p>
+                                    <p class="head_couter"><span class="white_color">Pengaduan Internal</span></p>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                           <div class="full counter_section margin_bottom_30 red_bg">
+                              <div class="couter_icon">
+                                 <div> 
+                                    <i class="fa fa-cube"></i>
+                                 </div>
+                              </div>
+                              <div class="counter_no">
+                                 <div>
+                                    <p class="total_no"><span class="white_color">{{ stat_pengaduan.jml_pengaduan_proses }}</span></p>
+                                    <p class="head_couter"><span class="white_color">Pengaduan Dalam Proses</span></p>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+
+                     <!-- Social Media Card -->
+                     <!--
+                     <div class="row column1 social_media_section">
+                        <div class="col-md-6 col-lg-3">
+                           <div class="full socile_icons fb margin_bottom_30">
+                              <div class="social_icon">
+                                 <i class="fa fa-code"></i>
+                              </div>
+                              <div class="social_cont">
+                                 <ul>
+                                    <li>
+                                       <span><strong>35k</strong></span>
+                                       <span>Friends</span>
+                                    </li>
+                                    <li>
+                                       <span><strong>128</strong></span>
+                                       <span>Feeds</span>
+                                    </li>
+                                 </ul>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                           <div class="full socile_icons tw margin_bottom_30">
+                              <div class="social_icon">
+                                 <i class="fa fa-twitter"></i>
+                              </div>
+                              <div class="social_cont">
+                                 <ul>
+                                    <li>
+                                       <span><strong>584k</strong></span>
+                                       <span>Followers</span>
+                                    </li>
+                                    <li>
+                                       <span><strong>978</strong></span>
+                                       <span>Tweets</span>
+                                    </li>
+                                 </ul>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                           <div class="full socile_icons linked margin_bottom_30">
+                              <div class="social_icon">
+                                 <i class="fa fa-linkedin"></i>
+                              </div>
+                              <div class="social_cont">
+                                 <ul>
+                                    <li>
+                                       <span><strong>758+</strong></span>
+                                       <span>Contacts</span>
+                                    </li>
+                                    <li>
+                                       <span><strong>365</strong></span>
+                                       <span>Feeds</span>
+                                    </li>
+                                 </ul>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                           <div class="full socile_icons google_p margin_bottom_30">
+                              <div class="social_icon">
+                                 <i class="fa fa-google-plus"></i>
+                              </div>
+                              <div class="social_cont">
+                                 <ul>
+                                    <li>
+                                       <span><strong>450</strong></span>
+                                       <span>Followers</span>
+                                    </li>
+                                    <li>
+                                       <span><strong>57</strong></span>
+                                       <span>Circles</span>
+                                    </li>
+                                 </ul>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     -->
+
+                     <!-- graph -->
+                      <!--
+                     <div class="row column2 graph margin_bottom_30">
+                        <div class="col-md-l2 col-lg-12">
+                           <div class="white_shd full">
+                              <div class="full graph_head">
+                                 <div class="heading1 margin_0">
+                                    <h2>Extra Area Chart</h2>
+                                 </div>
+                              </div>
+                              <div class="full graph_revenue">
+                                 <div class="row">
+                                    <div class="col-md-12">
+                                       <div class="content">
+                                          <div class="area_chart">
+                                             <canvas id="my-Annual-Review-Chart" style="margin-top: 20px; height: 200px; width: 100%;"></canvas>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     -->
+                     <!-- end graph -->
+                     
+
+                     <!-- Testi Rows -->
+                     <div class="row column3">
+                        <!-- testimonial -->
+                        
+                        <div class="col-md-6">
+                           <div class="dark_bg full margin_bottom_30">
+                              <div class="full graph_head">
+                                 <div class="heading1 margin_0">
+                                    <h2><i class="fa fa-map"></i> Ulasan Terkini</h2>
+                                 </div>
+                              </div>
+                              <div class="full graph_revenue">
+                                 <div class="row">
+                                    <div class="col-md-12">
+                                       <div class="content testimonial">
+                                          <div id="testimonial_slider" class="carousel slide" data-ride="carousel">
+                                             <!-- Wrapper for carousel items -->
+                                             <div class="carousel-inner">
+                                                <div class="item carousel-item active">
+                                                   <div class="img-box"><img src="{{ url_for('static',filename='reviewer_thumbnail/' ~ data[3].reviewer_id ~ '.jpg') }}" alt=""></div>
+                                                   <p class="testimonial">
+                                                      {% for _ in range(data[3].rating) %}
+                                                          ⭐
+                                                      {% endfor %}
+                                                      <br>
+                                                      {{ data[3].snippet | truncate(250, True, '...') }}
+                                                   </p>
+                                                   <p class="overview"><b>{{ data[3].name }}</b></p>
+                                                   <p>{{ data[3].tgl_ulasan | humanize_date }} </p>
+                                                </div>
+                                                {% for row in data %}                                                
+                                                <div class="item carousel-item">
+                                                   <div class="img-box"><img src="{{ url_for('static',filename='reviewer_thumbnail/' ~ row['reviewer_id'] ~ '.jpg') }}" ></div>
+                                                   <p class="testimonial">
+                                                      {% for _ in range(row['rating']) %}
+                                                          ⭐
+                                                      {% endfor %}
+                                                   
+                                                   <span>
+                                                   {% if row['snippet'] and row['snippet'] is string %}
+                                                   {{ row['snippet'] | truncate(250, True, '...') }}
+                                                   {% else %}</span></p>
+                                                   <span></span>
+                                                   {% endif %}
+                                                   <p class="overview"><b>{{ row['name'] }}</b></p>
+                                                   <p>{{ row['tgl_ulasan'] | humanize_date }}</p>
+                                                </div>
+                                                {% endfor %}
+                                                <!--
+                                                <div class="item carousel-item">
+                                                   <div class="img-box"><img src="images/layout_img/user_img.jpg" alt=""></div>
+                                                   <p class="testimonial">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae..</p>
+                                                   <p class="overview"><b>Michael Stuart</b>Seo Founder</p>
+                                                </div>
+                                                -->
+                                             </div>
+                                             <!-- Carousel controls -->
+                                             <a class="carousel-control left carousel-control-prev" href="#testimonial_slider" data-slide="prev">
+                                             <i class="fa fa-angle-left"></i>
+                                             </a>
+                                             <a class="carousel-control right carousel-control-next" href="#testimonial_slider" data-slide="next">
+                                             <i class="fa fa-angle-right"></i>
+                                             </a>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <!-- end testimonial -->
+
+                        <!-- pengaduan -->
+                        <div class="col-md-6">
+                           <div class="dash_blog">
+                              <div class="dash_blog_inner">
+                                 <div class="list_cont">
+                                    <p>Pengaduan Internal</p>
+                                 </div>
+                                 <div class="msg_list_main">
+                                    <ul class="msg_list">
+                                       {% for row in data_pengaduan %}
+                                       <li>
+                                          <span>
+                                             {% if row['sumber'] == 'Whatsapp' %}
+                                             <img src="https://cdn-icons-png.flaticon.com/512/3670/3670051.png" alt="#" width=48 />
+                                             {% elif row['sumber'] == 'Instagram' %}
+                                             <img src="https://cdn-icons-png.freepik.com/256/15789/15789364.png" alt="#" width=48>
+                                             {% elif row['sumber'] == 'Website' or row['sumber'] == 'Form Pengaduan' %}
+                                             <img src="https://cdn-icons-png.flaticon.com/512/235/235230.png" alt="#" width=48>
+                                             {% elif row['sumber'] == 'Facebook' %}
+                                             <img src="https://cdn-icons-png.flaticon.com/512/145/145802.png" alt="#">
+                                             {% elif row['sumber'] == 'Telegram' %}
+                                             <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" alt="#">
+                                             {% elif row['sumber'] == 'Tiktok' %}
+                                             <img src="https://cdn-icons-png.flaticon.com/512/3621/3621450.png" alt="#">
+                                             {% else %}
+                                             <img src="https://cdn-icons-png.flaticon.com/512/2959/2959936.png" alt="#">
+                                             {% endif %}
+
+                                          </span>
+                                          <span>
+                                          <span class="name_user">{{ row['nama'] }}</span>
+                                          <span class="msg_user">{{ row['isi_pengaduan'] }}</span>
+                                          <span class="time_ago">{{ row['tgl_pengaduan'] | humanize_date }}</span>
+                                          </span>
+                                       </li>
+                                       {% endfor %}                                       
+                                    </ul>
+                                 </div>
+                                 <div class="read_more">
+                                    <div class="center"><a class="main_bt read_bt" href="#">Read More</a></div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <!-- end pengaduan -->
+                     </div>
+                     <!-- End Testi Rows -->
+
+                  </div> 
+                  <!-- end container-fluid -->
+
+                  <!-- footer -->
+                  <div class="container-fluid">
+                     <div class="footer">
+                        <p>Dashboard Analisis Respons dan Aspirasi (DARA) <br>
+                        Copyright © 2025 by DARA TEAM. All rights reserved. </p>
+                     </div>
+                  </div>
+               </div>
+               <!-- end dashboard inner -->
+            </div>
+         </div>
+      </div>
+      <!-- jQuery -->
+      <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+
+      <!-- wow animation -->
+      <script src="{{ url_for('static', filename='js/animate.js') }}"></script>
+      
+      <!-- select country -->
+      <script src="{{ url_for('static', filename='js/bootstrap-select.js') }}"></script>
+      
+      <!-- owl carousel -->
+      <script src="{{ url_for('static', filename='js/owl.carousel.js') }}"></script>
+      
+      <!-- chart js -->
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      <script src="{{ url_for('static', filename='js_chart/chart_overview.js') }}"></script>
+      <script src="js/Chart.min.js"></script>
+      <script src="js/Chart.bundle.min.js"></script>
+      <script src="js/utils.js"></script>
+      <script src="js/analyser.js"></script>
+      <!-- nice scrollbar -->
+      <script src="{{ url_for('static', filename='js/perfect-scrollbar.min.js') }}"></script>
+   
+      <script>
+         var ps = new PerfectScrollbar('#sidebar');
+      </script>
+      <!-- custom js -->
+      <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/chart_custom_style1.js') }}"></script>
+      
+   </body>
+</html>

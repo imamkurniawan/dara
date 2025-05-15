@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <!-- basic -->
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <!-- mobile metas -->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+      <!-- site metas -->
+      <title>DARA - Dashboard Analisis Respons dan Aspirasi</title>
+      <meta name="keywords" content="">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+      <!-- site icon -->
+      <link rel="icon" href="{{ url_for('static', filename='images/fevicon.png') }}" type="image/png" />
+      <!-- bootstrap css -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" />
+      <!-- site css -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+      <!-- responsive css -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}" />
+      <!-- color css -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/colors.css') }}" />
+      <!-- select bootstrap -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-select.css') }}" />
+      <!-- scrollbar css -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/perfect-scrollbar.css') }}" />
+      <!-- custom css -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}" />
+      <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      <![endif]-->
+   </head>
+   <body class="inner_page login">
+      <div class="full_container">
+         <div class="container">
+            <div class="center verticle_center full_height">
+               <div class="login_section">
+                  <div class="logo_login">
+                     <div class="center">
+                        <img width="210" src="{{ url_for('static', filename='images/logo/logo.png') }}" alt="#" />
+                     </div>
+                  </div>
+                  <div class="login_form">
+                     <form action="/login" method="post">
+                        <fieldset>
+                           <p style="text-align: center;" class="red_color"> {{ pesan }} </p>
+                           <div class="field">
+                              <label class="label_field">Email Address</label>
+                              <input type="email" name="username" placeholder="E-mail" />
+                           </div>
+                           <div class="field">
+                              <label class="label_field">Password</label>
+                              <input type="password" name="password" placeholder="Password" />
+                           </div>
+                           <div class="field">
+                              <label class="label_field hidden">hidden label</label>
+                              <label class="form-check-label"><input type="checkbox" class="form-check-input"> Remember Me</label>
+                              <a class="forgot" href="">Forgotten Password?</a>
+                           </div>
+                           <div class="field margin_0">
+                              <label class="label_field hidden">hidden label</label>
+                              <button class="main_bt">Sign In</button>
+                           </div>
+                        </fieldset>
+                     </form>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+            <!-- jQuery -->
+            <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+            <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+            <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+      
+            <!-- wow animation -->
+            <script src="{{ url_for('static', filename='js/animate.js') }}"></script>
+            
+            <!-- select country -->
+            <script src="{{ url_for('static', filename='js/bootstrap-select.js') }}"></script>
+            
+            <!-- owl carousel -->
+            <script src="{{ url_for('static', filename='js/owl.carousel.js') }}"></script>
+            
+            <!-- chart js -->
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script src="{{ url_for('static', filename='js_chart/chart_overview.js') }}"></script>
+            <script src="js/Chart.min.js"></script>
+            <script src="js/Chart.bundle.min.js"></script>
+            <script src="js/utils.js"></script>
+            <script src="js/analyser.js"></script>
+            <!-- nice scrollbar -->
+            <script src="{{ url_for('static', filename='js/perfect-scrollbar.min.js') }}"></script>
+         
+            <script>
+               var ps = new PerfectScrollbar('#sidebar');
+            </script>
+            <!-- custom js -->
+            <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
+            <script src="{{ url_for('static', filename='js/chart_custom_style1.js') }}"></script>
+   </body>
+</html>

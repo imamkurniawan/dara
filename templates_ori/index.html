@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Analisis Rumah Sakit</title>
+  <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+  <!-- login  -->
+  {% if session.user == 'admin' %}
+  <div class="card-user">
+    <div class="user-info">
+      <div class="username"><i class="fas fa-user icon-green fa-lg"></i> Admin</div>          
+    </div>
+    <div class="user-info">
+      <div class="status">Online</div>
+    </div>
+    <a href="logout"><button class="btn btn-logout">Logout</button></a>
+    <!-- Ganti button di atas dengan ini jika belum login -->
+    <!-- <button class="btn btn-login">Login</button> -->
+  </div>
+  {% else %}
+  <div class="card-user">
+    <div class="user-info">
+      <div class="username"></div>
+    </div>
+    <div class="user-info">
+      <div class="status">Offline</div>
+    </div>
+    <a href="login"><button class="btn btn-login">Login</button></a>
+    <!-- Ganti button di atas dengan ini jika belum login -->
+    <!-- <button class="btn btn-login">Login</button> -->
+  </div>
+  {% endif %}
+  <!-- end login -->
+
+  <div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- <img src="{{ url_for('static', filename='images/logo.png') }}" width="100%"> -->
+      <a href="/"><h2>Dashboard</h2></a>
+      <ul>
+        <li><a href="overview"><i class="fas fa-pie-chart"></i> Overview</a></li>
+        <li><a href="pengaduan"><i class="fas fa-bullhorn"></i> Data Pengaduan</a></li>
+        <li><a href="filter_ulasan"><i class="fas fa-comments"></i> Data Ulasan</a></li>        
+        <li><a href="prediksi"><i class="fas fa-smile-wink"></i> Topik dan Sentimen</a></li>
+        <li><a href=""><i class="fas fa-chart-line"></i> Laporan Interaktif</a></li>
+        <li><a href="persons"><i class="fas fa-user"></i> Persons</a></li>
+        <li><a href="places"><i class="fas fa-building"></i> Places</a></li> 
+        {% if session.user == 'admin' %}  
+          <li><a href="reviews"><i class="fas fa-comments icon-red"></i> <p class="icon-red">Manajemen Data</p></a></li>
+          <li><a href="panel"><i class="fas fa-cogs icon-red"></i> <p class="icon-red">Pengaturan</p></a></li>         
+        {% endif %}
+        <li><a href=""><i class="far fa-file-alt"></i> Bantuan & Dokumentasi</a></li>
+      </ul>
+    </div>
+    <!-- end of Sidebar -->
+
+    <div class="main-content">
+
+      <div class="nav">
+          <h2>DARA (Dashboard Analisis Respons dan Aspirasi) - RSUD Kota Mataram</h2>
+      </div>
+      
+      <div class="cards">
+        <div class="card-description">
+          <div>
+            <p class="icon-grey">DARA hadir sebagai solusi inovatif untuk meningkatkan kualitas pelayanan rumah sakit melalui pendekatan berbasis data. Dirancang untuk membantu rumah sakit memahami kebutuhan masyarakat, meningkatkan kualitas layanan, dan mendorong transparansi dalam pengelolaan pelayanan kesehatan di Kota Mataram.</p>              
+          </div>
+          <!-- <img src="{{ url_for('static', filename='images/combined_wordcloud.png') }}" alt=""> -->
+        </div>
+        <div class="card-description">            
+            <div class="cards">
+                <div class="review-card">
+                    <h4>Total Ulasan</h4>
+                    <h2> {{ stat[0] }} </h2>
+                </div>
+                <div class="review-card">
+                    <h4>Average Rating</h4>
+                    <h2>  {{ stat[1] }}/5 </h2>
+                </div>
+                <div class="review-card">
+                  <h4><font color="green">Positif</font></h4>
+                  <h2>{{ sentimen.persen_positif }} %</h2>
+              </div>
+              <div class="review-card">
+                <h4><font color="grey">Netral</font></h4>
+                <h2>{{ sentimen.persen_biasa }} %</h2>
+            </div>
+            <div class="review-card">
+              <h4><font color="red">Negatif</font></h4>
+              <h2>{{ sentimen.persen_negatif }} %</h2>
+          </div>
+            </div>
+        </div>
+      </div>
+
+      <div class="reviews-section">
+          <h3 style="text-align: left;"><i class="fas fa-bullhorn icon-grey"></i> Pengaduan Terkini</h3>
+          <div class="reviews-grid">
+              {% for row in data_pengaduan %}
+                  <div class="review-card">
+                      <h3><img src="{{ url_for('static',filename='images/anonim.jpg') }}" width="48">{{ row['nama'] }}</h3>
+                      <p>{{ row['alamat'] }}</p>
+                      Sumber : <b>{{ row['sumber'] }}</b>
+                      <p> {{ row['isi_pengaduan'] | truncate(250, True, '...')}} </p>
+                      <p><b> {{ row['tgl_pengaduan'] | humanize_date }} </b></p>
+                  </div>
+              {% endfor %}
+          </div>
+      </div>
+
+      <div class="reviews-section">
+          <h3 style="text-align: left;"><i class="fas fa-comments icon-grey"></i> Ulasan terkini</h3>
+          <div class="reviews-grid">
+              {% for row in data %}
+                  <div class="review-card">
+                    <h3><img src="{{ url_for('static', filename='reviewer_thumbnail/' ~ row['reviewer_id'] ~ '.jpg') }}" alt="User Avatar" class="avatar">
+                    {{ row['name'] }}</h3>
+                    <p>
+                    {% for _ in range(row['rating']) %}
+                        ⭐
+                    {% endfor %}
+                    </p>
+                    <p>
+                      {% if row['snippet'] and row['snippet'] is string %}
+                        {{ row['snippet'] | truncate(250, True, '...') }}
+                      {% else %}
+                        <p></p>
+                      {% endif %}
+                    </p>
+                    <p><b> {{ row['tgl_ulasan'] | humanize_date }} </b></p>
+                  </div>
+              {% endfor %}
+          </div>
+      </div>
+    </div> <!-- end main-content -->
+
+  </div> <!-- end container -->
+  <!-- Footer -->
+  <div class="footer">
+    <p>© 2025 Dashboard Analisis Ulasan Rumah Sakit Kota Mataram</p>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

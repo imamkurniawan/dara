@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Analisis Rumah Sakit</title>
+  <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    table {
+      
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background-color: #f4f4f4;
+      font-weight: bold;
+    }
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <h2>Dashboard</h2>
+      <ul>
+        <li><a href="/"><i class="fas fa-chart-line"></i> Overview</a></li>
+        <li><a href="topic"><i class="fas fa-tags"></i> Analisis Topik</a></li>
+        <li><a href="topic02"><i class="fas fa-tags"></i> Analisis Sentimen</a></li>
+        <li class="active"><a href="reviews"><i class="fas fa-comments"></i> Semua Ulasan</a></li>     
+        <li><a href="ulasan_lengkap"><i class="fas fa-tags"></i> Tagged Review</a></li>   
+        <li><a href="dashboard"><i class="fas fa-database"></i> Looker</a></li>
+        <li><a href="panel"><i class="fas fa-cogs"></i> Pengaturan</a></li>
+      </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <h2>Entry Data Ulasan</h2>
+        <form action="saveUlasan" method="POST">
+            <table>
+                  <input type="hidden" name="record_no" value="{{ last_record }}"> {{ last_record }}
+                <tr>
+                    <td>Reviewer ID</td>
+                    <td>:</td>
+                    <td><input type="number" name="reviewer_id" id="" style="width: 300px;" required></td>
+                </tr>
+                <tr>
+                    <td>Thumbnail</td>
+                    <td>:</td>
+                    <td><input type="url" name="thumbnail" id="" style="width: 500px;" placeholder="https://thumbnail.com"></td>
+                </tr>
+                <tr>
+                    <td>Name</td>
+                    <td>:</td>
+                    <td><input type="text" name="name" style="width: 300px;" required></td>
+                </tr>
+                    <td>Local Guide</td>
+                    <td>:</td>
+                    <td>
+                        <input type="radio" name="localGuide" value="FALSE" checked> Average Reviewer <br>
+                        <input type="radio" name="localGuide" value="TRUE"> Local Guide <br>
+                    </td>
+                <tr>
+                    <td>Tanggal Ulasan</td>
+                    <td>:</td>
+                    <td><input type="datetime-local" name="tgl_ulasan" id="" required></td>
+                </tr>
+                <tr>
+                    <td>Rating</td>
+                    <td>:</td>
+                    <td>                        
+                        <input type="radio" id="5" name="rating" value="5" checked> ⭐⭐⭐⭐⭐<br>
+                        <input type="radio" id="4" name="rating" value="4"> ⭐⭐⭐⭐<br>
+                        <input type="radio" id="3" name="rating" value="3"> ⭐⭐⭐<br>
+                        <input type="radio" id="2" name="rating" value="2"> ⭐⭐<br>
+                        <input type="radio" id="1" name="rating" value="1"> ⭐<br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Isi Ulasan</td>
+                    <td>:</td>
+                    <td>
+                        <textarea id="reviewContent" name="review" placeholder="Masukkan Isi Ulasan" rows="5" style="width: 500px;"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <button type="submit" class="btn">Simpan</button>
+                    </td>
+                </tr>
+            </table>
+            
+        </form>
+
+    </div> <!-- End main-content -->
+  </div> <!-- End container-->
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>© 2025 Dashboard Analisis Rumah Sakit. Semua Hak Dilindungi.</p>
+  </div>
+</body>
+</html>

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <!-- basic -->
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <!-- mobile metas -->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+      <!-- site metas -->
+      <title>DARA - Dashboard Analisis Respons dan Aspirasi</title>
+      <meta name="keywords" content="">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+      <!-- site icon -->
+      <link rel="icon" href="{{ url_for('static', filename='images/fevicon.png') }}" type="image/png" />
+      <!-- bootstrap css -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" />
+      <!-- site css -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+      <!-- responsive css -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}" />
+      <!-- color css -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/colors.css') }}" />
+      <!-- select bootstrap -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-select.css') }}" />
+      <!-- scrollbar css -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/perfect-scrollbar.css') }}" />
+      <!-- custom css -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}" />
+      <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      <![endif]-->
+   </head>
+   <body class="dashboard dashboard_1">
+      <div class="full_container">
+         <div class="inner_container">
+            <!-- Sidebar  -->
+            <nav id="sidebar">
+               <div class="sidebar_blog_1">
+                  <div class="sidebar-header">
+                     <div class="logo_section">
+                        <a href="/"><img class="logo_icon img-responsive" src="{{ url_for('static', filename='images/logo/logo_icon.png') }}" alt="#" /></a>
+                     </div>
+                  </div>
+                  <div class="sidebar_user_info">
+                     <div class="icon_setting"></div>
+                     <div class="user_profle_side">
+                        <div class="user_img"><img class="img-responsive" src="{{ url_for('static', filename='images/layout_img/user_img.jpg') }}" alt="#" /></div>
+                        <div class="user_info">
+                           <h6>{{ session['status'] }}</h6>
+                           <p><span class="online_animation"></span> Online</p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="sidebar_blog_2">
+                  <h4><a href="/" class="yellow_color">DARA Dashboard</a></h4>
+                  <ul class="list-unstyled components">                     
+                     <li><a href="overview"><i class="fa fa-dashboard orange_color"></i> <span>Overview</span></a></li>
+                     <li class="active">
+                        <a href="#pengaduan_page" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-commenting yellow_color"></i> <span>Pengaduan</span></a>
+                        <ul class="collapse list-unstyled" id="pengaduan_page">
+                           <li>
+                              <a href="pengaduan">> <span>Data Pengaduan</span></a>
+                           </li>
+                           <li>
+                              <a href="persons_pengaduan">> <span>Persons</span></a>
+                           </li>
+                           <li>
+                              <a href="places_pengaduan">> <span>Places</span></a>
+                           </li>
+                        </ul>
+                     </li>
+                     <li class="active">
+                        <a href="#ulasan_page" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-map blue1_color"></i> <span>Ulasan</span></a>
+                        <ul class="collapse list-unstyled" id="ulasan_page">
+                           <li>
+                              <a href="filter_ulasan">> <span>Data Ulasan</span></a>
+                           </li>
+                           <li>
+                              <a href="persons">> <span>Persons</span></a>
+                           </li>
+                           <li>
+                              <a href="places">> <span>Places</span></a>
+                           </li>
+                        </ul>
+                     </li>
+                     <li> 
+                        <a href="#laporan_interaktif"data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-line-chart yellow_color"></i> <span>Laporan Interaktif</span></a>
+                        <ul class="collapse list-unstyled" id="laporan_interaktif">
+                           <li>
+                              <a href="analisis_topik_ulasan">> <span>Analisis Topik Ulasan</span></a>
+                           </li>
+                           <li>
+                              <a href="monev_pengaduan_tahunan">> <span>Monev Pengaduan Tahunan</span></a>
+                           </li>
+                        </ul>
+                     </li>
+                     <li>
+                        <a href="#manajemen_data" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-database purple_color2"></i> <span>Manajemen Data</span></a>
+                        <ul class="collapse list-unstyled" id="manajemen_data">
+                           <li>
+                              <a href="entry_pengaduan">> <span>Entry Data Pengaduan</span></a>
+                           </li>
+                           <li>
+                              <a href="entry_ulasan">> <span>Entry Data Ulasan</span></a>
+                           </li>
+                        </ul>
+                     </li>
+                     <li>
+                        <a href="#bantuan" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-diamond green_color"></i> <span>Bantuan</span></a>
+                        <ul class="collapse list-unstyled" id="bantuan">
+                           <li>
+                              <a href="about">> <span>Tentang Kami</span></a>
+                           </li>
+                           <li>
+                              <a href="dokumentasi">> <span>Dokumentasi</span></a>
+                           </li>
+                           <li>
+                              <a href="faq">> <span>FAQ</span></a>
+                           </li>
+                        </ul>
+                     </li>
+                     <li><a href="settings"><i class="fa fa-cog yellow_color"></i> <span>Settings</span></a></li>
+                     <li><a href="logout"><i class="fas fa-sign-out-alt red_color"></i> <span>Logout</span></a></li>
+                  </ul>
+               </div>
+            </nav>
+            <!-- end sidebar -->
+            <!-- right content -->
+            <div id="content">
+               <!-- topbar -->
+               <div class="topbar">
+                  <nav class="navbar navbar-expand-lg navbar-light">
+                     <div class="full">
+                        <button type="button" id="sidebarCollapse" class="sidebar_toggle"><i class="fa fa-bars"></i></button>
+                        <div class="logo_section">
+                           <a href="/"><img class="img-responsive" src="{{ url_for('static', filename='images/logo/logo.png') }}" alt="#" /></a>
+                        </div>
+                        <div class="right_topbar">
+                           <div class="icon_info">
+                              <!--
+                              <ul>
+                                 <li><a href="#"><i class="fa fa-bell-o"></i><span class="badge">2</span></a></li>
+                                 <li><a href="#"><i class="fa fa-question-circle"></i></a></li>
+                                 <li><a href="#"><i class="fa fa-envelope-o"></i><span class="badge">3</span></a></li>
+                              </ul>
+                              -->
+                              <ul class="user_profile_dd">
+                                 <li>
+                                    <a class="dropdown-toggle" data-toggle="dropdown"><img class="img-responsive rounded-circle" src="{{ url_for('static', filename='images/layout_img/user_img.jpg') }}" alt="#" /><span class="name_user">{{ session['user'] }}</span></a>
+                                    <div class="dropdown-menu">
+                                       <a class="dropdown-item" href="profile.html">My Profile</a>
+                                       <a class="dropdown-item" href="settings.html">Settings</a>
+                                       <a class="dropdown-item" href="help.html">Help</a>
+                                       <a class="dropdown-item" href="#"><span>Log Out</span> <i class="fa fa-sign-out"></i></a>
+                                    </div>
+                                 </li>
+                              </ul>
+                           </div>
+                        </div>
+                     </div>
+                  </nav>
+               </div>
+               <!-- end topbar -->
+               <!-- dashboard inner -->
+               <div class="midde_cont">
+                  <div class="container-fluid">
+                     <div class="row column_title">
+                        <div class="col-md-12">
+                           <div class="page_title">
+                              <h2>Tentang Kami</h2>
+                           </div>
+                        </div>
+                     </div>                     
+                     <!-- graph -->                      
+                     <div class="row column1">
+                        <div class="col-md-l2 col-lg-12">
+                           <div class="white_shd full">
+                              <div class="full graph_head">
+                                 <div class="heading1 margin_0">
+                                    <h2>DARA (Dashboard Analisis Respons dan Aspirasi)</h2>
+                                 </div>
+                              </div>
+                              <div class="full graph_revenue">
+                                 <div class="row">
+                                    <div class="col-md-12">
+                                       <div class="content" style="padding: 20px;">
+                                          <p>Pelayanan kesehatan merupakan salah satu pilar utama dalam pembangunan masyarakat yang sejahtera. Rumah sakit, sebagai ujung tombak pelayanan kesehatan, diharapkan mampu memberikan layanan yang berkualitas serta responsif terhadap kebutuhan dan harapan masyarakat. Hal ini sesuai dengan Undang-Undang Nomor 25 Tahun 2009 tentang Pelayanan Publik, yang mengatur kewajiban penyelenggara layanan publik untuk memberikan pelayanan yang transparan, akuntabel, dan berorientasi pada kepuasan masyarakat. Selain itu, Undang-Undang Nomor 44 Tahun 2009 tentang Rumah Sakit juga mengamanatkan bahwa rumah sakit wajib memberikan pelayanan kesehatan yang adil, transparan, dan tidak diskriminatif.</p>
+                                          <p>RSUD Kota Mataram telah berupaya mengimplementasikan peraturan tersebut dengan menyediakan berbagai sarana pengaduan bagi masyarakat. Sarana pengaduan ini dikelola oleh bagian Humas rumah sakit dan mencakup berbagai saluran seperti pengaduan langsung, formulir pengaduan, WhatsApp, Instagram, serta website resmi. Namun, pengelolaan data pengaduan ini belum dimanfaatkan secara optimal. Sebagian besar pengaduan hanya dianggap sebagai masukan individual tanpa dianalisis lebih mendalam untuk mengidentifikasi pola, tren, atau sentimen masyarakat secara keseluruhan. Akibatnya, laporan yang dihasilkan belum mampu memberikan gambaran komprehensif mengenai tingkat kepuasan dan sentimen masyarakat terhadap layanan rumah sakit.</p>
+                                          <p>Di sisi lain, ulasan dan penilaian di platform digital seperti Google Maps telah menjadi salah satu referensi utama bagi masyarakat dalam menilai kualitas layanan, termasuk layanan rumah sakit. Meskipun ulasan tersebut mencerminkan tingkat kepuasan melalui rating yang diberikan, namun informasi ini belum memberikan wawasan mendalam tentang topik yang menjadi perhatian masyarakat serta sentimen yang terkandung di dalamnya.</p>
+                                          <p>Untuk menjawab tantangan ini, hadir sebuah inovasi bernama DARA (Dashboard Analisis Respons dan Aspirasi). DARA adalah sistem informasi berbasis web yang dirancang untuk menyempurnakan pengelolaan data pengaduan masyarakat dan ulasan digital. Selain memanfaatkan data pengaduan yang telah ada, DARA juga mengintegrasikan data ulasan dari Google Maps. Semua data ini dikelola dalam sebuah database sistem informasi yang memungkinkan proses pengolahan dan analisis data dilakukan dengan lebih mudah, cepat, dan terstruktur.</p>
+                                          <p>DARA memiliki kemampuan untuk memberikan laporan yang lebih beragam dan informatif kepada para pemangku kepentingan. Dengan memanfaatkan teknologi seperti analisis sentimen dan analisis topik berbasis pembelajaran mesin, data dapat diolah menjadi informasi yang relevan untuk mendukung pengambilan keputusan strategis dalam peningkatan pelayanan. Misalnya, data pengaduan dapat diklasifikasikan berdasarkan topik seperti pelayanan, administrasi, komunikasi, dan fasilitas, serta dianalisis sentimennya (positif, netral, atau negatif).</p>
+                                          <p>Tahapan pengembangan aplikasi DARA dimulai dengan koordinasi bersama bagian Humas RSUD Kota Mataram untuk memahami sistem pelaporan pengaduan yang sudah berjalan, termasuk alur, format, dan kendala yang dihadapi. Setelah itu, dilakukan analisis kebutuhan untuk menentukan fitur-fitur yang harus tersedia dalam aplikasi, seperti jenis data yang harus dikelola, visualisasi yang diperlukan, serta mekanisme integrasi dengan data ulasan dari Google Maps.</p>
+                                          <p>Tahapan selanjutnya adalah pengembangan model pembelajaran mesin untuk memprediksi topik dan sentimen dari data pengaduan dan ulasan. Model ini memungkinkan aplikasi untuk secara otomatis mengelompokkan data ke dalam kategori spesifik dengan sentimen yang relevan. Setelah itu, dilakukan perancangan sistem informasi, termasuk antarmuka pengguna yang intuitif dan sistem backend yang mendukung otomatisasi dan analisis data. Implementasi sistem dilakukan dengan mengintegrasikan model pembelajaran mesin ke dalam dashboard web yang siap digunakan. Akhirnya, dilakukan evaluasi menyeluruh untuk memastikan aplikasi berjalan sesuai harapan dari segi akurasi prediksi, kemudahan penggunaan, serta potensi pengembangan lebih lanjut.</p>
+                                          <p>Aplikasi DARA memiliki sejumlah keunggulan dibandingkan sistem pelaporan tradisional. Salah satunya adalah kemampuannya dalam memprediksi topik dan sentimen secara otomatis menggunakan pembelajaran mesin. Fitur ini memungkinkan pengguna memahami fokus utama dari pengaduan atau ulasan tanpa harus memilah data secara manual, sehingga proses analisis menjadi lebih efisien. Selain itu, aplikasi ini juga dilengkapi dengan fitur rekomendasi solusi yang dihasilkan dari analisis riwayat pengaduan sebelumnya, memberikan panduan berbasis data untuk menyelesaikan masalah serupa di masa mendatang. Data yang telah diolah disajikan dalam bentuk visualisasi interaktif yang ditampilkan secara real-time, memudahkan pengguna untuk memahami pola dan tren data dengan cepat dan akurat.</p>
+                                          <p>Dengan adanya DARA, RSUD Kota Mataram diharapkan dapat mengoptimalkan pengelolaan data pengaduan dan ulasan masyarakat. Informasi yang dihasilkan dapat digunakan untuk meningkatkan kualitas pelayanan secara berkelanjutan, sehingga memenuhi harapan masyarakat sekaligus memenuhi standar yang diamanatkan oleh peraturan perundang-undangan. DARA menjadi langkah strategis dalam mendukung pelayanan kesehatan yang lebih responsif, transparan, dan akuntabel.</p>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>                     
+                     <!-- end graph -->
+
+                     
+                     <br>
+                     <!--
+                     <div class="row column1">
+                        <div class="col-md-12 col-lg-12">
+                           <div class="full purple_bg margin_bottom_30">
+                              <div class="info_people">
+                                 <div class="p_info_img">
+                                    
+                                    <img src="{{ url_for('static', filename='images/logo/logo.png') }}" alt="#" />
+                                 </div>
+                                 <div class="user_info_cont">
+                                    <h4 class="orange_color">Dashboard Analisis Respons dan Aspirasi</h4>
+                                    <p class="p_status">Versi 2.0</p>                                    
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     -->
+
+                     <!-- row -->
+                     <div class="row column1">
+                        <div class="col-md-12 col-lg-4">
+                           <div class="full white_shd margin_bottom_30">
+                              <div class="info_people">
+                                 <div class="p_info_img">
+                                    <!-- {{ url_for('static', filename='images/logo/logo.png') }} -->
+                                    <img src="{{ url_for('static', filename='images/layout_img/msg2.png') }}" alt="#" />
+                                 </div>
+                                 <div class="user_info_cont">
+                                    <h4>Ratih Diyan Pratiwi</h4>
+                                    <p>developer@gmail.com</p>
+                                    <p class="p_status">Business Process Analyst</p>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                           <div class="full white_shd margin_bottom_30">
+                              <div class="info_people">
+                                 <div class="p_info_img">
+                                    <img src="{{ url_for('static', filename='images/layout_img/msg3.png') }}" alt="#" />
+                                 </div>
+                                 <div class="user_info_cont">
+                                    <h4>Wiwiek Yuliandari</h4>
+                                    <p>developer@gmail.com</p>
+                                    <p class="p_status">Dokumentasi</p>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                           <div class="full white_shd margin_bottom_30">
+                              <div class="info_people">
+                                 <div class="p_info_img">
+                                    <img src="{{ url_for('static', filename='images/layout_img/msg4.png') }}" alt="#" />
+                                 </div>
+                                 <div class="user_info_cont">
+                                    <h4>Imam Kurniawan</h4>
+                                    <p>imamkurniawan.ntb@gmail.com</p>
+                                    <p class="p_status">System Analyst & Developer</p>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <!-- end row -->
+                     
+                     <div class="row column1">
+                        <div class="col-md-l2 col-lg-12">
+                           <div class="white_shd full">
+                              <div class="full graph_head">
+                                 <div class="heading1 margin_0">
+                                    <h2>Kontributor</h2>
+                                 </div>
+                              </div>
+                              <div class="full graph_revenue">
+                                 <div class="row">
+                                    <div class="col-md-12">
+                                       <div class="content" style="padding: 20px;">
+                                          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe quibusdam, expedita cupiditate animi alias quisquam at architecto aspernatur iure provident beatae pariatur placeat. Laudantium nulla distinctio blanditiis iusto porro a.</p>
+                                          <li>Dr. John Connor</li>
+                                          <li>Dr. Sarah Connor</li>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+
+                     
+
+                  </div> 
+                  <!-- end container-fluid -->
+
+                  <!-- footer -->
+                  <div class="container-fluid">
+                     <div class="footer">
+                        <p>Dashboard Analisis Respons dan Aspirasi (DARA) <br>
+                        Copyright © 2025 by DARA TEAM. All rights reserved. </p>
+                     </div>
+                  </div>
+               </div>
+               <!-- end dashboard inner -->
+            </div>
+         </div>
+      </div>
+      <!-- jQuery -->
+      <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+
+      <!-- wow animation -->
+      <script src="{{ url_for('static', filename='js/animate.js') }}"></script>
+      
+      <!-- select country -->
+      <script src="{{ url_for('static', filename='js/bootstrap-select.js') }}"></script>
+      
+      <!-- owl carousel -->
+      <script src="{{ url_for('static', filename='js/owl.carousel.js') }}"></script>
+      
+      <!-- chart js -->
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      <script src="{{ url_for('static', filename='js_chart/chart_overview.js') }}"></script>
+      <script src="js/Chart.min.js"></script>
+      <script src="js/Chart.bundle.min.js"></script>
+      <script src="js/utils.js"></script>
+      <script src="js/analyser.js"></script>
+      <!-- nice scrollbar -->
+      <script src="{{ url_for('static', filename='js/perfect-scrollbar.min.js') }}"></script>
+   
+      <script>
+         var ps = new PerfectScrollbar('#sidebar');
+      </script>
+      <!-- custom js -->
+      <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/chart_custom_style1.js') }}"></script>
+      
+   </body>
+</html>
