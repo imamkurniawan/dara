@@ -39,6 +39,7 @@
       <div class="full_container">
          <div class="inner_container">
             <!-- Sidebar  -->
+             <!--
             <nav id="sidebar">
                <div class="sidebar_blog_1">
                   <div class="sidebar-header">
@@ -133,10 +134,15 @@
                   </ul>
                </div>
             </nav>
+            -->
+            {% include 'sidebar.html' %}
             <!-- end sidebar -->
+
             <!-- right content -->
             <div id="content">
+
                <!-- topbar -->
+                <!--
                <div class="topbar">
                   <nav class="navbar navbar-expand-lg navbar-light">
                      <div class="full">
@@ -146,13 +152,11 @@
                         </div>
                         <div class="right_topbar">
                            <div class="icon_info">
-                              <!--
                               <ul>
                                  <li><a href="#"><i class="fa fa-bell-o"></i><span class="badge">2</span></a></li>
                                  <li><a href="#"><i class="fa fa-question-circle"></i></a></li>
                                  <li><a href="#"><i class="fa fa-envelope-o"></i><span class="badge">3</span></a></li>
                               </ul>
-                              -->
                               <ul class="user_profile_dd">
                                  <li>
                                     <a class="dropdown-toggle" data-toggle="dropdown"><img class="img-responsive rounded-circle" src="{{ url_for('static', filename='images/layout_img/user_img.jpg') }}" alt="#" /><span class="name_user">{{ session['user'] }}</span></a>
@@ -169,7 +173,10 @@
                      </div>
                   </nav>
                </div>
+               -->
+               {% include 'topbar.html' %}
                <!-- end topbar -->
+
                <!-- dashboard inner -->
                <div class="midde_cont">
                   <div class="container-fluid">
@@ -437,17 +444,17 @@
                                        {% for row in data_pengaduan %}
                                        <li>
                                           <span>
-                                             {% if row['sumber'] == 'Whatsapp' %}
+                                             {% if row['sumber_pengaduan'] == 'Whatsapp' %}
                                              <img src="https://cdn-icons-png.flaticon.com/512/3670/3670051.png" alt="#" width=48 />
-                                             {% elif row['sumber'] == 'Instagram' %}
+                                             {% elif row['sumber_pengaduan'] == 'Instagram' %}
                                              <img src="https://cdn-icons-png.freepik.com/256/15789/15789364.png" alt="#" width=48>
-                                             {% elif row['sumber'] == 'Website' or row['sumber'] == 'Form Pengaduan' %}
+                                             {% elif row['sumber_pengaduan'] == 'Website' or row['sumber_pengaduan'] == 'Form Pengaduan' %}
                                              <img src="https://cdn-icons-png.flaticon.com/512/235/235230.png" alt="#" width=48>
-                                             {% elif row['sumber'] == 'Facebook' %}
+                                             {% elif row['sumber_pengaduan'] == 'Facebook' %}
                                              <img src="https://cdn-icons-png.flaticon.com/512/145/145802.png" alt="#">
-                                             {% elif row['sumber'] == 'Telegram' %}
+                                             {% elif row['sumber_pengaduan'] == 'Telegram' %}
                                              <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" alt="#">
-                                             {% elif row['sumber'] == 'Tiktok' %}
+                                             {% elif row['sumber_pengaduan'] == 'Tiktok' %}
                                              <img src="https://cdn-icons-png.flaticon.com/512/3621/3621450.png" alt="#">
                                              {% else %}
                                              <img src="https://cdn-icons-png.flaticon.com/512/2959/2959936.png" alt="#">
@@ -463,9 +470,11 @@
                                        {% endfor %}                                       
                                     </ul>
                                  </div>
+                                 <!--
                                  <div class="read_more">
                                     <div class="center"><a class="main_bt read_bt" href="#">Read More</a></div>
                                  </div>
+                                 -->
                               </div>
                            </div>
                         </div>

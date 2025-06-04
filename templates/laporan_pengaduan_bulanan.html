@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <!-- basic -->
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <!-- mobile metas -->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+      <!-- site metas -->
+      <title>DARA - Dashboard Analisis Respons dan Aspirasi</title>
+      <meta name="keywords" content="">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+      <!-- site icon -->
+      <link rel="icon" href="{{ url_for('static', filename='images/fevicon.png') }}" type="image/png" />
+      <!-- bootstrap css -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" />
+      <!-- site css -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+      <!-- responsive css -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}" />
+      <!-- color css -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/colors.css') }}" />
+      <!-- select bootstrap -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-select.css') }}" />
+      <!-- scrollbar css -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/perfect-scrollbar.css') }}" />
+      <!-- custom css -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}" />
+      <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      <![endif]-->
+   </head>
+   <body class="dashboard dashboard_1">
+      <div class="full_container">
+         <div class="inner_container">
+            <!-- Sidebar  -->
+            {% include 'sidebar.html' %}
+            <!-- end sidebar -->
+
+            <!-- right content -->
+            <div id="content">
+               <!-- topbar -->
+               {% include 'topbar.html' %}
+               <!-- end topbar -->
+               <!-- dashboard inner -->
+               <div class="midde_cont">
+                  <div class="container-fluid">
+                     <div class="row column_title">
+                        <div class="col-md-12">
+                           <div class="page_title">
+                              <h2>Laporan > Laporan Pengaduan Bulanan > {{thn}}</h2>
+                           </div>
+                        </div>
+                     </div>
+
+                     <!-- Tabel Jumlah Pengaduan -->
+                     <div class="row column1">
+                        <div class="col-md-l2 col-lg-12">
+                           <div class="white_shd full">
+                              <div class="full graph_head">
+                                 <div class="heading1 margin_0">
+
+                                    Pilih Periode
+                                    <form action="/laporan_pengaduan_bulanan" method="post">
+                                       <select id="tahun" name="thn" class="border border-gray-300 rounded-md px-2 py-1 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                                          <!-- <option value="semua">Semua Tahun</option> -->
+                                          <option value="2020">2020</option>
+                                          <option value="2021">2021</option>
+                                          <option value="2022">2022</option>
+                                          <option value="2023">2023</option>
+                                          <option value="2024">2024</option>
+                                          <option value="2025">2025</option>
+                                          <option value="0" selected>THN</option>
+                                       </select>
+                                       <select id="bulan" name="bln" class="border border-gray-300 rounded-md px-2 py-1 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                                          <!-- <option value="semua">Semua Tahun</option> -->
+                                          <option value="1">Januari</option>
+                                          <option value="2">Februari</option>
+                                          <option value="3">Maret</option>
+                                          <option value="4">April</option>
+                                          <option value="5">Mei</option>
+                                          <option value="6">Juni</option>
+                                          <option value="7">Juli</option>
+                                          <option value="8">Agustus</option>
+                                          <option value="9">September</option>
+                                          <option value="10">Oktober</option>
+                                          <option value="11">November</option>
+                                          <option value="12">Desember</option>
+                                          <option value="0" selected>BLN</option>
+                                       </select>
+                                       <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i> Filter Laporan </button>
+                                    </form>
+                                    <br>
+                                    <h4 class="blue1_color"></i> {{ label }}</h4>
+                                 </div>
+                              </div>
+                              <div class="full graph_revenue">
+                                 <div class="row">
+                                    <div class="col-md-12">
+                                       <div class="content" style="padding: 20px;">
+                                          <div class="table_row table-responsive">
+                                             <table class="table table-striped">
+                                                <thead>
+                                                   <th>No.</th>
+                                                   <th>Tanggal</th>
+                                                   <th>Nama</th>
+                                                   <th>No. HP</th>
+                                                   <th>Alamat</th>
+                                                   <th>Pengaduan</th>
+                                                   <th>Sumber Pengaduan</th>
+                                                   <th>Solusi Pengaduan</th>
+                                                </thead>
+                                                <tbody>
+                                                   {% if data_pengaduan is not none and data_pengaduan|length > 0 %}
+                                                      {% for i in data_pengaduan %}
+                                                         <tr>
+                                                               <td>{{ loop.index }}</td>
+                                                               <td>{{ i.tgl_pengaduan.strftime('%Y-%m-%d %H:%M:%S') if i.tgl_pengaduan else 'N/A' }}</td>
+                                                               <td>{{ i.nama }}</td>
+                                                               <td>{{ i.telepon }}</td>
+                                                               <td>{{ i.alamat }}</td>
+                                                               <td>{{ i.isi_pengaduan }}</td>
+                                                               <td>{{ i.sumber_pengaduan }}</td>
+                                                               <td>{{ i.solusi_pengaduan or 'Belum ada solusi' }}</td>
+                                                         </tr>
+                                                      {% endfor %}
+                                                   {% else %}
+                                                      <tr>
+                                                         <td colspan="8">Tidak ada data pengaduan.</td>
+                                                      </tr>
+                                                   {% endif %}
+                                               </tbody>                                               
+                                             </table>
+                                             <a href="/download_laporan_pengaduan_bulanan?thn={{thn}}&bln={{bln}}" target="_blank" class="btn btn-primary"><i class="fas fa-file-excel"></i> Download Laporan</a>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <!-- End of Tabel Jumlah Pengaduan -->
+
+                  </div> 
+                  <!-- end container-fluid -->
+
+                  <!-- footer -->
+                  <div class="container-fluid">
+                     <div class="footer">
+                        <p>Dashboard Analisis Respons dan Aspirasi (DARA) <br>
+                        Copyright © 2025 by DARA TEAM. All rights reserved. </p>
+                     </div>
+                  </div>
+               </div>
+               <!-- end dashboard inner -->
+            </div>
+         </div>
+      </div>
+      <!-- jQuery -->
+      <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+
+      <!-- wow animation -->
+      <script src="{{ url_for('static', filename='js/animate.js') }}"></script>
+      
+      <!-- select country -->
+      <script src="{{ url_for('static', filename='js/bootstrap-select.js') }}"></script>
+      
+      <!-- owl carousel -->
+      <script src="{{ url_for('static', filename='js/owl.carousel.js') }}"></script>
+      
+      <!-- chart js -->
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      <script src="{{ url_for('static', filename='js_chart/chart_overview.js') }}"></script>
+      <script src="js/Chart.min.js"></script>
+      <script src="js/Chart.bundle.min.js"></script>
+      <script src="js/utils.js"></script>
+      <script src="js/analyser.js"></script>
+      <!-- nice scrollbar -->
+      <script src="{{ url_for('static', filename='js/perfect-scrollbar.min.js') }}"></script>
+   
+      <script>
+         var ps = new PerfectScrollbar('#sidebar');
+      </script>
+      <!-- custom js -->
+      <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/chart_custom_style1.js') }}"></script>
+      
+   </body>
+</html>

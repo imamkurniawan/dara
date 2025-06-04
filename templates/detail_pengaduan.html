@@ -39,141 +39,22 @@
       <div class="full_container">
          <div class="inner_container">
             <!-- Sidebar  -->
-            <nav id="sidebar">
-               <div class="sidebar_blog_1">
-                  <div class="sidebar-header">
-                     <div class="logo_section">
-                        <a href="/"><img class="logo_icon img-responsive" src="{{ url_for('static', filename='images/logo/logo_icon.png') }}" alt="#" /></a>
-                     </div>
-                  </div>
-                  <div class="sidebar_user_info">
-                     <div class="icon_setting"></div>
-                     <div class="user_profle_side">
-                        <div class="user_img"><img class="img-responsive" src="{{ url_for('static', filename='images/layout_img/user_img.jpg') }}" alt="#" /></div>
-                        <div class="user_info">
-                           <h6>{{ session['status'] }}</h6>
-                           <p><span class="online_animation"></span> Online</p>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="sidebar_blog_2">
-                  <h4><a href="/" class="yellow_color">DARA Dashboard</a></h4>
-                  <ul class="list-unstyled components">                     
-                     <li><a href="overview"><i class="fa fa-dashboard orange_color"></i> <span>Overview</span></a></li>
-                     <li class="active">
-                        <a href="#pengaduan_page" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-commenting yellow_color"></i> <span>Pengaduan</span></a>
-                        <ul class="collapse list-unstyled" id="pengaduan_page">
-                           <li>
-                              <a href="pengaduan">> <span>Data Pengaduan</span></a>
-                           </li>
-                           <li>
-                              <a href="persons_pengaduan">> <span>Persons</span></a>
-                           </li>
-                           <li>
-                              <a href="places_pengaduan">> <span>Places</span></a>
-                           </li>
-                        </ul>
-                     </li>
-                     <li class="active">
-                        <a href="#ulasan_page" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-map blue1_color"></i> <span>Ulasan</span></a>
-                        <ul class="collapse list-unstyled" id="ulasan_page">
-                           <li>
-                              <a href="filter_ulasan">> <span>Data Ulasan</span></a>
-                           </li>
-                           <li>
-                              <a href="persons">> <span>Persons</span></a>
-                           </li>
-                           <li>
-                              <a href="places">> <span>Places</span></a>
-                           </li>
-                        </ul>
-                     </li>
-                     <li> 
-                        <a href="#laporan_interaktif"data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-line-chart yellow_color"></i> <span>Laporan Interaktif</span></a>
-                        <ul class="collapse list-unstyled" id="laporan_interaktif">
-                           <li>
-                              <a href="analisis_topik_ulasan">> <span>Analisis Topik Ulasan</span></a>
-                           </li>
-                           <li>
-                              <a href="monev_pengaduan_tahunan">> <span>Monev Pengaduan Tahunan</span></a>
-                           </li>
-                        </ul>
-                     </li>
-                     <li>
-                        <a href="#manajemen_data" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-database purple_color2"></i> <span>Manajemen Data</span></a>
-                        <ul class="collapse list-unstyled" id="manajemen_data">
-                           <li>
-                              <a href="entry_pengaduan">> <span>Entry Data Pengaduan</span></a>
-                           </li>
-                           <li>
-                              <a href="entry_ulasan">> <span>Entry Data Ulasan</span></a>
-                           </li>
-                        </ul>
-                     </li>
-                     <li>
-                        <a href="#bantuan" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-diamond green_color"></i> <span>Bantuan</span></a>
-                        <ul class="collapse list-unstyled" id="bantuan">
-                           <li>
-                              <a href="about">> <span>Tentang Kami</span></a>
-                           </li>
-                           <li>
-                              <a href="dokumentasi">> <span>Dokumentasi</span></a>
-                           </li>
-                           <li>
-                              <a href="faq">> <span>FAQ</span></a>
-                           </li>
-                        </ul>
-                     </li>
-                     <li><a href="settings"><i class="fa fa-cog yellow_color"></i> <span>Settings</span></a></li>
-                     <li><a href="logout"><i class="fas fa-sign-out-alt red_color"></i> <span>Logout</span></a></li>
-                  </ul>
-               </div>
-            </nav>
+            {% include 'sidebar.html' %}
             <!-- end sidebar -->
+
             <!-- right content -->
             <div id="content">
                <!-- topbar -->
-               <div class="topbar">
-                  <nav class="navbar navbar-expand-lg navbar-light">
-                     <div class="full">
-                        <button type="button" id="sidebarCollapse" class="sidebar_toggle"><i class="fa fa-bars"></i></button>
-                        <div class="logo_section">
-                           <a href="/"><img class="img-responsive" src="{{ url_for('static', filename='images/logo/logo.png') }}" alt="#" /></a>
-                        </div>
-                        <div class="right_topbar">
-                           <div class="icon_info">
-                              <!--
-                              <ul>
-                                 <li><a href="#"><i class="fa fa-bell-o"></i><span class="badge">2</span></a></li>
-                                 <li><a href="#"><i class="fa fa-question-circle"></i></a></li>
-                                 <li><a href="#"><i class="fa fa-envelope-o"></i><span class="badge">3</span></a></li>
-                              </ul>
-                              -->
-                              <ul class="user_profile_dd">
-                                 <li>
-                                    <a class="dropdown-toggle" data-toggle="dropdown"><img class="img-responsive rounded-circle" src="{{ url_for('static', filename='images/layout_img/user_img.jpg') }}" alt="#" /><span class="name_user">{{ session['user'] }}</span></a>
-                                    <div class="dropdown-menu">
-                                       <a class="dropdown-item" href="profile.html">My Profile</a>
-                                       <a class="dropdown-item" href="settings.html">Settings</a>
-                                       <a class="dropdown-item" href="help.html">Help</a>
-                                       <a class="dropdown-item" href="#"><span>Log Out</span> <i class="fa fa-sign-out"></i></a>
-                                    </div>
-                                 </li>
-                              </ul>
-                           </div>
-                        </div>
-                     </div>
-                  </nav>
-               </div>
+               {% include 'topbar.html' %}
                <!-- end topbar -->
+                
                <!-- dashboard inner -->
                <div class="midde_cont">
                   <div class="container-fluid">
                      <div class="row column_title">
                         <div class="col-md-12">
                            <div class="page_title">
-                              <h2>Manajemen Data > <a href="entry_pengaduan">Detail Pengaduan</a> > {{ data[0].reviewer_id }}</h2>
+                              <h2>Manajemen Data > <a href="entry_pengaduan">Detail Pengaduan</a> > {{ data[0].pengaduan_id }}</h2>
                            </div>
                         </div>
                      </div>
@@ -186,12 +67,22 @@
                                  <td></td>
                               </tr>
                               <tr>
+                                 <td class="purple_color2"><b>Status Pengaduan</b></td>
+                                 {% if data[0].status_pengaduan == 'Selesai' %}
+                                    <td class="green_bg white_color" style="text-align: center;"> <b>PENGADUAN SELESAI</b> </td>
+                                 {% elif data[0].status_pengaduan == 'Tolak' %}
+                                    <td class="red_bg white_color" style="text-align: center;"> <b>PENGADUAN DITOLAK</b> </td>
+                                 {% else %}
+                                    <td class="orange_bg white_color" style="text-align: center;"> <b>PENGADUAN DALAM PROSES</b> </td>
+                                 {% endif %}
+                              </tr>
+                              <tr>
                                  <td class="purple_color2"><b>Nomor Record</b></td>
                                  <td> {{ data[0].record_no }} </td>
                               </tr>
                               <tr>
                                  <td class="purple_color2"><b>Kode pengaduan</b></td>
-                                 <td>  {{ data[0].reviewer_id }} </td>
+                                 <td>  {{ data[0].pengaduan_id }} </td>
                               </tr>
                               <tr>
                                  <td class="purple_color2"><b>Tanggal Pengaduan</b></td>
@@ -211,27 +102,78 @@
                               </tr>
                               <tr>
                                  <td class="purple_color2"><b>Sumber Pengaduan</b></td>
-                                 <td> {{ data[0].sumber }} </td>
+                                 <td> {{ data[0].sumber_pengaduan }} </td>
                               </tr>
                               <tr>
                                  <td class="purple_color2"><b>Isi Pengaduan</b></td>
                                  <td> {{ data[0].fixed_pengaduan }} </td>
                               </tr>
                               <tr>
-                                 <td class="purple_color2"><b>Status Pengaduan</b></td>
-                                 {% if data[0].status_pengaduan == 'selesai' %}
-                                    <td class="green_bg white_color" style="text-align: center;"> <b>SELESAI</b> </td>
-                                 {% else %}
-                                    <td class="red_bg white_color" style="text-align: center;"> <b>DALAM PROSES</b> </td>
-                                 {% endif %}
+                                 <td class="purple_color2"><b>URL Pengaduan</b></td>
+                                 <td> 
+                                    <a href="/lacak_pengaduan?key={{ data[0].token }}" target="_blank" class="blue1_color">{{ host }}/lacak_pengaduan?key={{ data[0].token }}</a> 
+                                 </td>
+                                 
                               </tr>
                               <tr>
-                                 <td class="purple_color2" style="vertical-align: top;">Tanggal Penyelesaian</td>
-                                 <td> {{ data[0].tgl_selesai }} </td>
+                                 <td class="purple_color2"><b>Short URL</b></td>
+                                 <td> <a href="{{SHORT_URL}}" target="_blank" class="blue1_color">{{ SHORT_URL }}</a> </td>
                               </tr>
                               <tr>
-                                 <td class="purple_color2"><b>Solusi Pengaduan</b></td>
-                                 <td>{{ data[0].solusi_pengaduan }}</td>
+                                 <td class="purple_color2"><b>WhatsApp</b></td>
+                                 <td> 
+                                    <a href="https://wa.me/{{data[0].telepon}}?text=Pengaduan%20anda%20telah%20kami%20terima,%0Aini%20adalah%20url%20untuk%20melacak%20pengaduan%20anda%0A%0A{{ SHORT_URL }}" target="_blank">Hubungi Kami di WhatsApp</a> 
+
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td class="purple_color2"><b>Proses Pengaduan</b></td>
+                                 <td>
+                                    <div class="msg_list_main">
+                                       <ul class="msg_list">
+                                          {% for details in detail %}
+                                          <li>
+                                             <span>
+                                                <!-- <img src="https://cdn-icons-png.flaticon.com/512/219/219988.png" alt=""> -->
+                                                {% if details.actor == 'pelapor' %}
+                                                   <img src="https://cdn-icons-png.flaticon.com/512/219/219988.png" alt="">
+                                                {% elif details.actor == 'unit' %}
+                                                   <img src="https://cdn-icons-png.flaticon.com/512/219/219987.png" alt="">
+                                                {% else %}
+                                                   <img src="https://cdn-icons-png.flaticon.com/512/219/219969.png" alt="">
+                                                {% endif %}
+                                             </span>
+                                             <span>
+                                                <span class="name_user">
+                                                   {{details.progress_pengaduan}}                                                   
+                                                </span>
+                                                <span class="green_color">{{ details.status_pengaduan }}</span>    
+                                                <p> 
+                                                   {{details.keterangan}}
+                                                </p>
+                                                <span class="time_ago orange_color"> {{details.tgl}} </span>
+                                             </span>
+                                          </li>
+                                          {% endfor %}
+                                       </ul>
+                                    </div>
+                                 </td>
+                              </tr>
+                              
+                              <tr>
+                                 <td></td>
+                                 <td>
+                                    {% if data[0].progress_pengaduan == 'Pengaduan masuk' %}
+                                    <button type="button" class="btn btn-warning" onclick="window.location.href='form_verifikasi_humas?revID={{ data[0].pengaduan_id }}&progress={{data[0].progress_pengaduan}}'"><i class="fa fa-check-circle"></i> Verifikasi pengaduan oleh Humas</button>
+                                    {% elif data[0].progress_pengaduan == 'Verifikasi humas' and data[0].status_pengaduan != 'Tolak' %}
+                                    <button type="button" class="btn btn-warning" onclick="window.location.href='form_teruskan_pengaduan?revID={{ data[0].pengaduan_id }}&progress={{data[0].progress_pengaduan}}'"><i class="fa fa-check-circle"></i> Pengaduan diteruskan ke unit terkait</button>
+                                    <button type="button" class="btn btn-primary" onclick="window.location.href='form_penyelesaian_pengaduan?revID={{ data[0].pengaduan_id }}&progress={{data[0].progress_pengaduan}}'"><i class="fa fa-check-circle"></i> Penyelesaian pengaduan</button>
+                                    {% elif data[0].progress_pengaduan == 'Diteruskan ke unit terkait' %}                                    
+                                    <button type="button" class="btn btn-warning" onclick="window.location.href='form_verifikasi_unit?revID={{ data[0].pengaduan_id }}&progress={{data[0].progress_pengaduan}}'"><i class="fa fa-check-circle"></i> Verifikasi pengaduan oleh Unit</button>
+                                    {% elif data[0].progress_pengaduan == 'Verifikasi unit' and data[0].status_pengaduan != 'Tolak' %}                                    
+                                    <button type="button" class="btn btn-primary" onclick="window.location.href='form_penyelesaian_pengaduan?revID={{ data[0].pengaduan_id }}&progress={{data[0].progress_pengaduan}}'"><i class="fa fa-check-circle"></i> Penyelesaian pengaduan</button>
+                                    {% endif %}
+                                 </td>
                               </tr>
                               <tr>
                                  <td> - </td>
@@ -243,10 +185,8 @@
                                     <!-- Form dengan konfirmasi JavaScript -->
                                     <form id="deleteForm" action="hapus_pengaduan" method="post">
                                        <input type="hidden" name="recNo" value="{{ data[0].record_no }}">
-                                       <input type="hidden" name="revID" value="{{ data[0].reviewer_id }}">
-                                       {% if data[0].status_pengaduan != 'selesai' %}
-                                          <button type="button" class="btn btn-warning" onclick="window.location.href='form_update_status_pengaduan?revID={{ data[0].reviewer_id }}'"><i class="fa fa-check-circle"></i> Update Status</button>
-                                       {% endif %}
+                                       <input type="hidden" name="revID" value="{{ data[0].pengaduan_id }}">
+                                       <button type="button" class="btn btn-primary" onclick="window.location.href='entry_pengaduan'"><i class="fas fa-arrow-circle-left"></i> Kembali</button>
                                        <button type="button" class="btn btn-danger" onclick="confirmDelete()"><i class="fas fa-trash"></i> Hapus Data Pengaduan</button>
                                     </form>
                                  </td>
