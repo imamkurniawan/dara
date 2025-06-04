@@ -15,10 +15,6 @@ def create_host():
 def create_engine_db():
     # menggunakan mysqlalchemy
     '''
-    host = '34.101.187.72:3306'
-    user = 'flask'
-    password = 'D4r4_123456'
-    database_name = 'dara_db'
     
     '''
     host = 'localhost'
