@@ -56,63 +56,49 @@
                            <div class="dash_blog">
                               <div class="dash_blog_inner">
                                  <div class="list_cont">
+                                    {% if data_pengaduan[0].status_pengaduan == 'Selesai' %}
+                                    <h4 class="green_color">Pengaduan Selesai</h4>
+                                    {% elif data_pengaduan[0].status_pengaduan == 'Proses' %}
                                     <h4 class="orange_color">Pengaduan Dalam Proses</h4>
+                                    {% else %}
+                                    <h4 class="red_color">Pengaduan Ditolak</h4>
+                                    {% endif %}
                                     <p>
-                                       keluarga Pasien komplain kepada perawat di ruang perawatan 3A, keluarga pasien minta tolong untuk bantu ganti pampers pasien, karena hanya 1 org yg menemani pasien, tapi pihak perawat menyuruh untuk ganti sendiri, apa itu emang diluar tugas perawat apa gimana, susah sekali dimintain tolong.
+                                       {{ data_pengaduan[0].isi_pengaduan }}
                                     </p>
                                  </div>
                                  <div class="msg_list_main">
                                     <ul class="msg_list">
+                                       {% for detail in data_detail %}
                                        <li>
                                           <span>
-                                             <!-- <img src="https://cdn-icons-png.flaticon.com/512/219/219988.png" alt=""> -->
-                                              <img src="https://cdn-icons-png.flaticon.com/512/219/219969.png" alt="">
-                                          </span>
-                                          <span>
-                                          <span class="name_user">
-                                             Anda
-                                          </span>    
-                                          <p> 
-                                             Mengirimkan pengaduan
-                                          </p>
-                                          <span class="time_ago orange_color"> 7 Mei 2025  16:15:00 </span>
-                                          </span>
-                                       </li>
-                                       <li>
-                                          <span>
+                                             {% if detail.actor == 'pelapor' %}
+                                             <img src="https://cdn-icons-png.flaticon.com/512/219/219988.png" alt="">
+                                             {% elif detail.actor == 'humas' %}
+                                             <img src="https://cdn-icons-png.flaticon.com/512/219/219969.png" alt="">
+                                             {% else %}
                                              <img src="https://cdn-icons-png.flaticon.com/512/219/219987.png" alt="">
+                                             {% endif %}
                                           </span>
                                           <span>
-                                          <span class="name_user">
-                                             Humas RSUD Kota Mataram
-                                          </span>    
-                                          <ul>
-                                             <li>
-                                                <span class="orange_color"> 7 Mei 2025  16:32:00 </span> <br>
-                                                <span>Pengaduan disetujui oleh Humas</span>
-                                             </li>
-                                             <li>
-                                                <span class="orange_color"> 7 Mei 2025  16:32:00 </span> <br>
-                                                <span>Pengaduan telah diteruskan ke unit terkait (IRNA 3A)</span>
-                                             </li>
-                                             <li>
-                                                <span class="orange_color"> 7 Mei 2025  16:32:00 </span> <br>
-                                                <span>
-                                                   Pengaduan sudah diverifikasi oleh unit yang bersangkutan
-                                                </span>
-                                             </li>
-                                             <li>
-                                                <span class="orange_color"> 7 Mei 2025  16:32:00 </span> <br>
-                                                <span>
-                                                   Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non molestias aliquam atque magni hic iusto aperiam recusandae ipsa fuga corporis, asperiores ab amet voluptatum ipsum sed dicta! Quod, libero eum.
-                                                </span>
-                                             </li>
-                                          </ul>
-                                          
+                                             <span class="name_user">
+                                             {{ detail.progress_pengaduan }}
+                                             </span>
+                                             <p class="green_color">
+                                             {{ detail.status_pengaduan }}
+                                             </p>
+                                             <span>
+                                                {{ detail.keterangan }}
+                                             </span>
+                                             <span class="time_ago orange_color"> 
+                                                {{ detail.tgl }}
+                                             </span>
                                           </span>
-                                       </li>
-                                  
+                                          
+                                       </li>                                             
+                                       {% endfor %}                               
                                     </ul>
+                                    
                                  </div> <!-- list-main -->
                                  <div class="read_more">
                                     <div class="center"><a class="main_bt read_bt" href="#">Read More</a></div>

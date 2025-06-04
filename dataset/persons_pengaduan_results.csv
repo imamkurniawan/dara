@@ -1,8 +1,6 @@
-thn,reviewer_id,persons,persons_count
-2025,2025000102,satpam,1
-2025,2025000098,dokter,1
-2025,20250094,dokter spesialis,1
-2025,20250094,dokter,1
+thn,pengaduan_id,persons,persons_count
+2025,2025000025,pasien,1
+2025,2025000025,bayi,1
 2024,20240024,petugas,1
 2024,20240024,apoteker,1
 2024,20240023,perawat,4
@@ -35,32 +33,3 @@ thn,reviewer_id,persons,persons_count
 2024,20240009,pasien,1
 2024,20240009,dokter,1
 2024,20240006,pasien,1
-2023,20230084,perawat,1
-2023,20230082,dokter spesialis,1
-2023,20230082,dokter,1
-2023,20230081,petugas,1
-2023,20230079,dokter spesialis,1
-2023,20230079,dokter,1
-2023,20230025,satpam,1
-2022,20220067,perawat,2
-2022,20220066,petugas,1
-2022,20220065,dokter spesialis,1
-2022,20220065,dokter,1
-2022,20220064,dokter spesialis,1
-2022,20220064,dokter,1
-2022,20220062,perawat,1
-2022,20220058,dokter spesialis,1
-2022,20220058,dokter,1
-2021,20210056,perawat,1
-2021,20210055,dokter spesialis,1
-2021,20210055,dokter,1
-2021,20210054,petugas,1
-2021,20210051,dokter spesialis,1
-2021,20210051,dokter,1
-2021,20210049,perawat,1
-2021,20210044,perawat,1
-2021,20210042,perawat,1
-2020,20200041,petugas,1
-2020,20200038,perawat,1
-2020,20200035,petugas,1
-2020,20200028,petugas,1
