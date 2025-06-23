@@ -2,19 +2,24 @@ from dependecies import *
 
 ############################## Config Host ###################################
 ##############################################################################
-ip_server = 'http://34.101.187.72'
+HOSTNAME = 'http://rsud.mataramkota.go.id:5555'
+
 def create_host():
     host = socket.gethostname()
     host = 'http://'+socket.gethostbyname(host)
     return host
 
-
+COBA_HOST = create_host()
 ############################## Config Database MySQL #########################
 ##############################################################################
 # Konfigurasi koneksi database
 def create_engine_db():
     # menggunakan mysqlalchemy
     '''
+    host = '34.101.187.72:3306'
+    user = 'flask'
+    password = 'D4r4_123456'
+    database_name = 'dara_db'
     
     '''
     host = 'localhost'
