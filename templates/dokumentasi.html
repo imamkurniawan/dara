@@ -58,12 +58,12 @@
                         </div>
                      </div>                     
                      <!-- graph -->
+                     <!--
                      <div class="row column1">
                         <div class="col-md-12 col-lg-12">
                            <div class="full purple_bg margin_bottom_30">
                               <div class="info_people">
                                  <div class="p_info_img">
-                                    <!-- {{ url_for('static', filename='images/logo/logo.png') }} -->
                                     <img src="{{ url_for('static', filename='images/logo/logo.png') }}" alt="#" />
                                  </div>
                                  <div class="user_info_cont">
@@ -74,6 +74,7 @@
                            </div>
                         </div>
                      </div>
+                     -->
                      <div class="row column1">
                         <div class="col-md-l2 col-lg-12">
                            <div class="white_shd full">
@@ -86,9 +87,8 @@
                                  <div class="row">
                                     <div class="col-md-12">
                                        <div class="content" style="padding: 20px;">
-                                          <p>DARA (Dashboard Analisis Respons dan Aspirasi) adalah sebuah aplikasi berbasis web yang dirancang untuk mendukung analisis data pengaduan dan ulasan layanan publik secara efisien dan terstruktur. Dengan memanfaatkan teknologi machine learning dan visualisasi data interaktif, DARA memungkinkan pengguna untuk mengidentifikasi pola, menganalisis sentimen, dan mendapatkan wawasan mendalam terkait respons serta aspirasi masyarakat terhadap layanan publik, khususnya dalam sektor kesehatan. Aplikasi ini bertujuan untuk meningkatkan transparansi, akuntabilitas, dan kualitas pelayanan melalui pengambilan keputusan berbasis data yang lebih cerdas dan responsif.</p>
                                           <p>Informasi lebih lanjut mengenai desain, fitur, dan implementasi teknis aplikasi DARA dapat diakses melalui dokumen teknis dalam format PDF yang tersedia untuk dibuka dan diunduh melalui tautan berikut:</p>
-                                          <p><a href="{{ url_for('static', filename='dokumentasi/Teknis.pdf') }}" target="_blank"><i class="fas fa-file-pdf-o red_color"></i> Dokumentasi Teknis DARA.pdf</a></p>
+                                          <p><a href="{{ url_for('static', filename='dokumentasi/Teknis.pdf') }}" target="_blank"><i class="fas fa-file-pdf-o red_color"></i> <span class="red_color">Dokumentasi Teknis DARA</span></a></p>
                                        </div>
                                     </div>
                                  </div>
@@ -116,7 +116,6 @@
                                                    <th>Versi</th>
                                                    <th>Update</th>
                                                    <th>Deskripsi</th>
-                                                   <th>Dokumen</th>
                                                 </thead>
                                                 <tbody>
                                                    <tr>
@@ -124,14 +123,12 @@
                                                       <td>2.0.2</td>
                                                       <td>Template</td>
                                                       <td>Update seluruh template</td>
-                                                      <td><i class="fas fa-file-pdf-o"></i> Teknis.pdf</td>
                                                    </tr>
                                                    <tr>
                                                       <td>17-03-2025</td>
                                                       <td>2.0.1</td>
                                                       <td>Grafik</td>
                                                       <td>Ganti plotly, update menjadi chart.js</td>
-                                                      <td></td>
                                                    </tr>
                                                 </tbody>
                                              </table>
