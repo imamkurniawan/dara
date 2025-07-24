@@ -22,5 +22,6 @@ from io import BytesIO
 import pymysql
 from sqlalchemy import create_engine, text
 from sqlalchemy.exc import SQLAlchemyError
+from sqlalchemy.pool import NullPool
 import hashlib
 import socket

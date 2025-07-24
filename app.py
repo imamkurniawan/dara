@@ -21,6 +21,7 @@ bln_now = current_date.month
 
 # ambil host dari conf.py
 host = create_host()
+print (host)
 
 # buat engine db dari conf.py
 engine = create_engine_db()
@@ -648,7 +649,7 @@ def download_tbl_01():
 
     thn = request.args.get('thn')
     
-    host = 'http://localhost:5000/'
+    host = 'https://localhost:5000/'
     login_url = host+"login"  # URL login Flask
     data_url = host+f"monev_pengaduan_tahunan?thn={thn}"  # URL data tabel
     
