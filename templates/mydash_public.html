@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <!-- basic -->
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <!-- mobile metas -->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+      <!-- site metas -->
+      <title>DARA - Dashboard Analisis Respons dan Aspirasi</title>
+      <meta name="keywords" content="">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+      <!-- site icon -->
+      <link rel="icon" href="{{ url_for('static', filename='images/fevicon.png') }}" type="image/png" />
+      <!-- bootstrap css -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" />
+      <!-- site css -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+      <!-- responsive css -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}" />
+      <!-- color css -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/colors.css') }}" />
+      <!-- select bootstrap -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-select.css') }}" />
+      <!-- scrollbar css -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/perfect-scrollbar.css') }}" />
+      <!-- custom css -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}" />
+      <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      <![endif]-->
+   </head>
+   <body class="dashboard dashboard_1">
+      <div class="full_container">
+         <div class="inner_container">
+            <!-- Sidebar  -->
+            
+            <!-- end sidebar -->
+            
+            <!-- right content -->
+            <!-- <div id="content"> -->
+               <!-- topbar -->
+               
+               <!-- end topbar -->
+               <!-- dashboard inner -->
+               <div class="midde_cont">
+                  <div class="container-fluid">
+                     <div class="row column_title">
+                        <div class="col-md-12">
+                           <div class="page_title">
+                              <h2 class="orange_color">Ikhtisar Pengaduan Internal</h2>
+                           </div>
+                        </div>
+                     </div>
+                     <!-- card pengaduan -->
+                     <div class="row column1">
+                        <div class="col-md-6 col-lg-3">
+                           <div class="full counter_section margin_bottom_30">
+                              <div class="couter_icon">
+                                 <div> 
+                                    <i class="fa fa-commenting blue2_color"></i>
+                                 </div>
+                              </div>
+                              <div class="counter_no">
+                                 <div>
+                                    <p class="total_no">{{ data.total_pengaduan_internal }}</p>
+                                    <p class="head_couter">Total Pengaduan </p>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                           <div class="full counter_section margin_bottom_30">
+                              <div class="couter_icon">
+                                 <div> 
+                                    <i class="far fa-thumbs-up yellow_color"></i>
+                                 </div>
+                              </div>
+                              <div class="counter_no">
+                                 <div>
+                                    <p class="total_no">{{ data.total_pengaduan_selesai }}</p>
+                                    <p class="head_couter">Pengaduan Selesai</p>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                           <div class="full counter_section margin_bottom_30">
+                              <div class="couter_icon">
+                                 <div> 
+                                    <i class="fa fa-commenting green_color"></i>
+                                 </div>
+                              </div>
+                              <div class="counter_no">
+                                 <div>
+                                    <p class="total_no">{{ data.total_pengaduan_internal_terkini }}</p>
+                                    <p class="head_couter">Pengaduan Tahun ini</p>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                           <div class="full counter_section margin_bottom_30">
+                              <div class="couter_icon">
+                                 <div> 
+                                    <i class="fa fa-cube red_color"></i>
+                                 </div>
+                              </div>
+                              <div class="counter_no">
+                                 <div>
+                                    <p class="total_no">{{ data.total_pengaduan_on_proses }}</p>
+                                    <p class="head_couter">Pengaduan Dalam Proses</p>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <!-- end card pengaduan -->
+
+                     <!-- chart -->
+
+                     <div class="row column2">
+                        <div class="col-lg-6">
+                           <div class="white_shd full margin_bottom_30">                              
+                              <div class="map_section padding_infor_info">
+                                 <h5>Pengaduan Pertahun</h5>
+                                 <canvas id="my-Annual-Pengaduan-Chart" style="margin-top: 20px; height: 200px; width: 100%;"></canvas>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-lg-6">
+                           <div class="white_shd full margin_bottom_30">                              
+                              <div class="map_section padding_infor_info">
+                                 <h5>Pengaduan Tahun {{ thn }}</h5>
+                                 <canvas id="my-Monthly-Pengaduan-Chart" style="margin-top: 20px; height: 200px; width: 100%;"></canvas>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-lg-6">
+                           <div class="white_shd full margin_bottom_30">                              
+                              <div class="map_section padding_infor_info">
+                                 <h5>Topik Pengaduan Pertahun</h5>
+                                 <canvas id="my-Annual-Topic-Chart" style="margin-top: 20px; height: 200px; width: 100%;"></canvas>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-lg-6">
+                           <div class="white_shd full margin_bottom_30">                              
+                              <div class="map_section padding_infor_info">
+                                 <h5>Sumber Pengaduan Pertahun</h5>
+                                 <canvas id="my-Annual-Sumber-Chart" style="margin-top: 20px; height: 200px; width: 100%;"></canvas>
+                              </div>
+                           </div>
+                        </div>
+
+                      </div>
+                     <!-- row -->
+                     <div class="row column1">
+                        <div class="col-lg-6">
+                           <div class="white_shd full margin_bottom_30">
+                              <div class="full graph_head">
+                                 <div class="heading1 margin_0">
+                                    <h2>Sumber Pengaduan</h2>
+                                 </div>
+                              </div>
+                              <div class="map_section padding_infor_info">
+                                 <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Saepe quam doloribus ipsum possimus aliquam cum reprehenderit ab, quibusdam, asperiores ratione officiis impedit explicabo architecto odit placeat. Neque, nostrum? Architecto, molestiae!</p>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-lg-3">
+                           <div class="white_shd full margin_bottom_30">                              
+                              <div class="map_section padding_infor_info">
+                                 <h5>Sumber Pengaduan</h5>
+                                 <canvas id="sumber-Pengaduan-Chart" style="margin-top: 10px; width: 100%;"></canvas>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-lg-3">
+                           <div class="white_shd full margin_bottom_30">                              
+                              <div class="map_section padding_infor_info">
+                                 <h5>Topik Pengaduan</h5>
+                                 <canvas id="topik-Pengaduan-Chart" style="margin-top: 10px; width: 100%;"></canvas>
+                              </div>
+                           </div>
+                        </div>                  
+                     </div>
+                     <!-- end row -->
+                      
+                     
+                     <!-- title ulasan google maps -->
+                     <div class="row column_title">
+                        <div class="col-md-12">
+                           <div class="page_title">
+                              <h2 class="blue2_color">Ikhtisar Ulasan Google Maps</h2>
+                           </div>
+                        </div>
+                     </div>
+                     <!-- card ulasan -->
+                     <div class="row column1">
+                        <div class="col-md-6 col-lg-3">
+                           <div class="full counter_section margin_bottom_30">
+                              <div class="couter_icon">
+                                 <div> 
+                                    <i class="fa fa-map blue2_color"></i>
+                                 </div>
+                              </div>
+                              <div class="counter_no">
+                                 <div>
+                                    <p class="total_no">{{ data.total_reviews }}</p>
+                                    <p class="head_couter">Total Ulasan </p>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                           <div class="full counter_section margin_bottom_30">
+                              <div class="couter_icon">
+                                 <div> 
+                                    <i class="fa fa-star yellow_color"></i>
+                                 </div>
+                              </div>
+                              <div class="counter_no">
+                                 <div>
+                                    <p class="total_no">{{ data.average_rating }}/5.0</p>
+                                    <p class="head_couter">Average Rating</p>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                           <div class="full counter_section margin_bottom_30">
+                              <div class="couter_icon">
+                                 <div> 
+                                    <i class="fas fa-smile green_color"></i>
+                                 </div>
+                              </div>
+                              <div class="counter_no">
+                                 <div>
+                                    <p class="total_no">{{ data.sentimen.persen_positif }} %</p>
+                                    <p class="head_couter">Sentimen Positif</p>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                           <div class="full counter_section margin_bottom_30">
+                              <div class="couter_icon">
+                                 <div> 
+                                    <i class="fas fa-frown red_color"></i>
+                                 </div>
+                              </div>
+                              <div class="counter_no">
+                                 <div>
+                                    <p class="total_no">{{ data.sentimen.persen_negatif }} %</p>
+                                    <p class="head_couter">Sentimen Negatif</p>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <!-- end card ulasan -->
+
+                     <div class="row column2">
+                        <div class="col-lg-3">
+                           <div class="white_shd full margin_bottom_30">                              
+                              <div class="map_section padding_infor_info">
+                                 <h5>Total Rating</h5>
+                                 <canvas id="my-Total-Rating-Chart" style="margin-top: 20px; height: 100%; width: 100%;"></canvas>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-lg-3">
+                           <div class="white_shd full margin_bottom_30">                              
+                              <div class="map_section padding_infor_info">
+                                 <p>Rating ini dihitung berdasarkan semua ulasan yang diterima, memperhitungkan jumlah dan kualitas ulasan untuk memberikan gambaran keseluruhan tentang pengalaman pengguna.</p>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-lg-3">
+                           <div class="white_shd full margin_bottom_30">                              
+                              <div class="map_section padding_infor_info">
+                                 <h5>Local Guide Reviewer</h5>
+                                 <canvas id="my-LocalGuide-Chart" style="margin-top: 20px;"></canvas>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-lg-3">
+                           <div class="white_shd full margin_bottom_30">                              
+                              <div class="map_section padding_infor_info">
+                                 <p>Ulasan dari Local Guide membantu memberikan gambaran yang lebih lengkap dan mendetail tentang suatu lokasi, sehingga sering dianggap lebih terpercaya</p>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-lg-6">
+                           <div class="white_shd full margin_bottom_30">                              
+                              <div class="map_section padding_infor_info">
+                                 <h5>Ulasan Pertahun</h5>
+                                 <canvas id="my-Annual-Review-Chart" style="margin-top: 20px; height: 200px; width: 100%;"></canvas>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-lg-6">
+                           <div class="white_shd full margin_bottom_30">                              
+                              <div class="map_section padding_infor_info">
+                                 <h5>Rating Pertahun</h5>
+                                 <canvas id="my-Annual-Rating-Chart" style="margin-top: 20px; height: 200px; width: 100%;"></canvas>
+                              </div>
+                           </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                           <div class="white_shd full margin_bottom_30">                              
+                              <div class="map_section padding_infor_info">
+                                 <h5>Topik Ulasan Pertahun</h5>
+                                 <canvas id="my-Annual-Review-Topic-Chart" style="margin-top: 20px; height: 200px; width: 100%;"></canvas>
+                              </div>
+                           </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                           <div class="white_shd full margin_bottom_30">                              
+                              <div class="map_section padding_infor_info">
+                                 <h5>Sentimen Masyarakat Pertahun</h5>
+                                 <canvas id="my-Annual-Sentiment-Chart" style="margin-top: 20px; height: 200px; width: 100%;"></canvas>
+                              </div>
+                           </div>
+                        </div>
+
+                     </div>
+
+                     
+                                         
+                  </div> 
+                  <!-- end container-fluid -->
+
+                  <!-- footer -->
+                  <div class="container-fluid">
+                     <div class="footer">
+                        
+                     </div>
+                  </div>
+               </div>
+               <!-- end dashboard inner -->
+            <!-- </div> -->
+         </div>
+      </div>
+      <!-- jQuery -->
+      <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+
+      <!-- wow animation -->
+      <script src="{{ url_for('static', filename='js/animate.js') }}"></script>
+      
+      <!-- select country -->
+      <script src="{{ url_for('static', filename='js/bootstrap-select.js') }}"></script>
+      
+      <!-- owl carousel -->
+      <script src="{{ url_for('static', filename='js/owl.carousel.js') }}"></script>
+      
+      <!-- chart js -->
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      <script src="{{ url_for('static', filename='js_chart/chart_overview.js') }}"></script>
+      <script src="{{ url_for('static', filename='js_chart/chart_pengaduan.js') }}"></script>
+      
+      <script src="js/Chart.min.js"></script>
+      <script src="js/Chart.bundle.min.js"></script>
+      <script src="js/utils.js"></script>
+      <script src="js/analyser.js"></script>
+      <!-- nice scrollbar -->
+      <script src="{{ url_for('static', filename='js/perfect-scrollbar.min.js') }}"></script>
+   
+      <script>
+         var ps = new PerfectScrollbar('#sidebar');
+      </script>
+      <!-- custom js -->
+      <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/chart_custom_style1.js') }}"></script>
+      
+   </body>
+</html>

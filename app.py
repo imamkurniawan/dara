@@ -21,6 +21,7 @@ bln_now = current_date.month
 
 # ambil host dari conf.py
 host = create_host()
+print (host)
 
 # buat engine db dari conf.py
 engine = create_engine_db()
@@ -74,7 +75,25 @@ def sebelum_request():
 
 # cek sudah login apa belum
 def cek_login():
-    allowed_routes = ['login', 'static', 'lacak_pengaduan']  # Route yang diizinkan tanpa login
+    allowed_routes = [
+        'login', 
+        'static', 
+        'lacak_pengaduan',
+        'overview_public',
+        'chart_data_ulasan_pertahun',
+        'chart_data_rating_pertahun',
+        'chart_reviewer',
+        'chart_total_rating',
+        'chart_data_topik_ulasan_pertahun',
+        'chart_data_sentimen_ulasan_pertahun',
+        'chart_data_pengaduan_pertahun',
+        'chart_data_pengaduan_perbulan',
+        'chart_sumber_pengaduan',
+        'chart_data_topik_pengaduan_pertahun',
+        'chart_data_sumber_pengaduan_pertahun',
+        'chart_topik_pengaduan_filter'
+        ]  
+    # Route yang diizinkan tanpa login
     if request.endpoint not in allowed_routes and not session.get('user'):
         return redirect(url_for('login'))
 
@@ -173,6 +192,44 @@ def overview():
         'sentimen':sentimen
     }
     return render_template('mydash.html', data=data, thn=thn)
+
+@app.route('/overview_public')
+def overview_public():
+    # ambil total review dan rata-rata rating
+    data_ulasan = get_data_ulasan()
+    total_reviews, average_rating = calculate_review_stats(data_ulasan)
+    
+    data_pengaduan = get_data_pengaduan()
+    total_pengaduan_internal = len(data_pengaduan)
+    # print (data_pengaduan)
+    
+    # ambil tahun sekarang
+    current_date = date.today()
+    thn = current_date.year
+    data_pengaduan_thn_terkini = data_pengaduan.query("thn_pengaduan == @thn")
+    total_pengaduan_internal_terkini = len(data_pengaduan_thn_terkini)
+    # print (data_pengaduan_thn_terkini)
+
+    data_pengaduan_selesai = data_pengaduan.query("status_pengaduan == 'Selesai'")
+    total_pengaduan_selesai = len(data_pengaduan_selesai)
+
+    data_pengaduan_on_proses = data_pengaduan.query("status_pengaduan == 'Proses'")
+    total_pengaduan_on_proses = len(data_pengaduan_on_proses)
+
+    # ambil sentimen
+    sentimen = calculate_sentiment()
+
+    data = {
+        'total_reviews':total_reviews,
+        'average_rating':average_rating,
+        'total_pengaduan_internal':total_pengaduan_internal,
+        'total_pengaduan_internal_terkini':total_pengaduan_internal_terkini,
+        'total_pengaduan_selesai':total_pengaduan_selesai,
+        'total_pengaduan_on_proses':total_pengaduan_on_proses,
+        'sentimen':sentimen
+    }
+    return render_template('mydash_public.html', data=data, thn=thn)
+    #return f'overview public'
 
 @app.route('/pengaduan')
 def pengaduan():
@@ -592,7 +649,7 @@ def download_tbl_01():
 
     thn = request.args.get('thn')
     
-    host = 'http://localhost:5000/'
+    host = 'https://localhost:5000/'
     login_url = host+"login"  # URL login Flask
     data_url = host+f"monev_pengaduan_tahunan?thn={thn}"  # URL data tabel
     
@@ -639,7 +696,9 @@ def entry_pengaduan():
     # if 'user' not in session:
     #    return redirect(url_for('login'))
     # Ambil data dari Excel
+
     df = get_data_pengaduan()
+    
     # Konversi DataFrame ke daftar untuk dikirim ke template
     data = df.to_dict(orient="records")  # Mengonversi setiap baris menjadi dictionary
     columns = df.columns.tolist()  # Mendapatkan nama kolom
@@ -683,12 +742,15 @@ def detail_pengaduan():
     df_detail = df_detail.query("pengaduan_id == @pengaduan_id")
     detail = df_detail.to_dict(orient="records")
 
-    host = ip_server
+    host = HOSTNAME
     key = data[0]['token']
-    LONG_URL = ip_server+'/lacak_pengaduan?key='+key
+    LONG_URL = HOSTNAME+'/lacak_pengaduan?key='+key
     API_URL = f"http://tinyurl.com/api-create.php?url={LONG_URL}"
     response = requests.get(API_URL)
     SHORT_URL = response.text
+
+    print (COBA_HOST)
+    print (HOSTNAME)
 
     return render_template("detail_pengaduan.html", data=data, detail=detail, host=host, LONG_URL=LONG_URL, SHORT_URL=SHORT_URL)
 

@@ -28,8 +28,10 @@ thn,record_no,pengaduan_id,predicted_topic,predicted_sentiment,count
 2024,22,20240022,pelayanan,negatif,1
 2024,23,20240023,pelayanan,negatif,1
 2024,24,20240024,pelayanan,negatif,2
-2025,25,2025000025,fasilitas,negatif,1
-2025,25,2025000025,komunikasi,negatif,1
+2025,25,2025000025,pelayanan,positif,1
+2025,26,2025000026,fasilitas,positif,1
+2025,26,2025000026,pelayanan,negatif,3
+2025,27,2025000027,fasilitas,positif,1
+2025,27,2025000027,pelayanan,negatif,3
 2024,6,20240006,administrasi,negatif,1
 2024,16,20240016,pelayanan,biasa,1
-2025,25,2025000025,pelayanan,biasa,1

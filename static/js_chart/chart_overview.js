@@ -52,14 +52,14 @@ const ctx = document.getElementById('my-LocalGuide-Chart').getContext('2d');
 const total = data.datasets[0].data.reduce((acc, value) => acc + value, 0);
 // Tetapkan warna berdasarkan label
 const colors = data.labels.map(label => {
-    if (label === true) return "rgba(75, 192, 75, 0.6)"; // Hijau untuk True
-    if (label === false) return "rgba(255, 99, 132, 0.6)"; // Merah untuk False
+    if (label === 'TRUE') return "rgba(75, 192, 75, 0.6)"; // Hijau untuk True
+    if (label === "FALSE") return "rgba(255, 99, 132, 0.6)"; // Merah untuk False
     return "rgba(150, 150, 150, 0.6)"; // Default warna abu-abu
 });
 // Tetapkan warna hover
 const hoverColors = data.labels.map(label => {
-    if (label === true) return "rgba(75, 192, 75, 0.8)"; // Hijau lebih gelap untuk hover
-    if (label === false) return "rgba(255, 99, 132, 0.8)"; // Merah lebih gelap untuk hover
+    if (label === 'TRUE') return "rgba(75, 192, 75, 0.8)"; // Hijau lebih gelap untuk hover
+    if (label === 'FALSE') return "rgba(255, 99, 132, 0.8)"; // Merah lebih gelap untuk hover
     return "rgba(150, 150, 150, 0.8)"; // Default warna hover abu-abu
 });
 new Chart(ctx, {
@@ -77,7 +77,7 @@ new Chart(ctx, {
         plugins: {
             legend: {
                 display: true,
-                position: 'bottom' // Posisi legenda
+                position: 'right' // Posisi legenda
             },
             tooltip: {
                 callbacks: {

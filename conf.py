@@ -2,25 +2,19 @@ from dependecies import *
 
 ############################## Config Host ###################################
 ##############################################################################
-ip_server = 'http://34.101.187.72'
+HOSTNAME = 'https://rsud.mataramkota.go.id:5555'
+
 def create_host():
     host = socket.gethostname()
-    host = 'http://'+socket.gethostbyname(host)
+    host = 'https://'+socket.gethostbyname(host)
     return host
 
-
+COBA_HOST = create_host()
 ############################## Config Database MySQL #########################
 ##############################################################################
 # Konfigurasi koneksi database
 def create_engine_db():
     # menggunakan mysqlalchemy
-    '''
-    host = '34.101.187.72:3306'
-    user = 'flask'
-    password = 'D4r4_123456'
-    database_name = 'dara_db'
-    
-    '''
     host = 'localhost'
     user = 'root'
     password = ''
@@ -31,7 +25,12 @@ def create_engine_db():
     DATABASE_URL = f"mysql+pymysql://{user}:{password}@{host}/{database_name}"
 
     # Membuat engine SQLAlchemy
-    engine = create_engine(DATABASE_URL)
+    engine = create_engine(
+        DATABASE_URL,
+        poolclass=NullPool,  # Nonaktifkan connection pooling
+        pool_recycle=3600,   # Refresh koneksi setiap 1 jam
+        pool_pre_ping=True   # Cek koneksi sebelum digunakan
+    )
     return engine
 
 '''

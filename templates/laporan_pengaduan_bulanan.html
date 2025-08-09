@@ -114,6 +114,7 @@
                                                    <th>Pengaduan</th>
                                                    <th>Sumber Pengaduan</th>
                                                    <th>Solusi Pengaduan</th>
+                                                   <th>Dokumentasi</th>
                                                 </thead>
                                                 <tbody>
                                                    {% if data_pengaduan is not none and data_pengaduan|length > 0 %}
@@ -121,17 +122,18 @@
                                                          <tr>
                                                                <td>{{ loop.index }}</td>
                                                                <td>{{ i.tgl_pengaduan.strftime('%Y-%m-%d %H:%M:%S') if i.tgl_pengaduan else 'N/A' }}</td>
-                                                               <td>{{ i.nama }}</td>
-                                                               <td>{{ i.telepon }}</td>
-                                                               <td>{{ i.alamat }}</td>
+                                                               <td>{{ i.nama or 'Anonim' }}</td>
+                                                               <td>{{ i.telepon or '-' }}</td>
+                                                               <td>{{ i.alamat or '-' }}</td>
                                                                <td>{{ i.isi_pengaduan }}</td>
                                                                <td>{{ i.sumber_pengaduan }}</td>
                                                                <td>{{ i.solusi_pengaduan or 'Belum ada solusi' }}</td>
+                                                               <td><img src="{{ url_for('static', filename='images/landing_page/stack-of-three-black-hot-stones-spa-salon-vector-16122479.jpg') }}" alt="" width="100"></td>
                                                          </tr>
                                                       {% endfor %}
                                                    {% else %}
                                                       <tr>
-                                                         <td colspan="8">Tidak ada data pengaduan.</td>
+                                                         <td colspan="9" class="red_color">Tidak ada data pengaduan.</td>
                                                       </tr>
                                                    {% endif %}
                                                </tbody>                                               
