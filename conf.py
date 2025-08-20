@@ -4,12 +4,16 @@ from dependecies import *
 ##############################################################################
 HOSTNAME = 'https://rsud.mataramkota.go.id:5555'
 
+def create_hostname():
+    return 'https://rsud.mataramkota.go.id:5555'
+
 def create_host():
     host = socket.gethostname()
     host = 'https://'+socket.gethostbyname(host)
     return host
 
 COBA_HOST = create_host()
+
 ############################## Config Database MySQL #########################
 ##############################################################################
 # Konfigurasi koneksi database
@@ -87,7 +91,7 @@ dataset = {
 
 
 ############################ Config User ##################################
-##############################################################################
+###########################################################################
 
 # Fungsi untuk membaca data users
 def get_data_users():
@@ -98,3 +102,33 @@ def get_data_users():
     return df
 
  
+##################### Config API google maps reviews #########################
+# Melakukan scrapping data ulasan google maps review menggunakan scrapingdog #
+##############################################################################
+def get_google_reviews(page_token=""):
+    #api_key = "679cecbb3e5da8505e80ebb4" #imamkurniawan.ntb@gmail.com
+    api_key = "68a29ff70ffa466114cb8648" #imamkurniawan.moba@gmail.com
+    url = "https://api.scrapingdog.com/google_maps/reviews"
+    data_id = "0x2dcdbf4240a7ae15:0x7c96adfc5edd7c11"
+  
+    params = {
+        "api_key": api_key,
+        "data_id": data_id,
+        "language": "id",
+        "sort_by" : "newestFirst",
+        "next_page_token" : page_token
+        #"next_page_token" : "CAESY0NBRVFDaHBFUTJwRlNVRlNTWEJEWjI5QlVEY3lSM1p4TW14bExWOWZSV2hEZUVGMGIwNTNYMEZLUWtveGVIaG1PRUZCUVVGQlIyZHVPVEl4UVVOaExYSmhWamMwV1VGRFNVRQ=="
+    }
+  
+    response = requests.get(url, params=params)
+    if response.status_code == 200:
+        data = response.json()
+        return (data)
+    else:
+        return (f"Request failed with status code: {response.status_code}")
+
+def get_google_reviews_json():
+    data = get_google_reviews()
+    return jsonify(data)
+
+####################### End of Google reviews API config ####################### 

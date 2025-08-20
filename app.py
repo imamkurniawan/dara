@@ -407,6 +407,8 @@ def persons():
     df.sort_values(by="count", ascending=False, inplace=True)
     data = df.to_dict(orient="records")
 
+    print (data)
+
     return render_template("persons.html",data=data)
 
 @app.route("/person_review",methods=["GET","POST"])
@@ -418,8 +420,9 @@ def person_review():
     reviewer_ids = df['reviewer_id'].unique()
     
     # Baca dataset 'gmaps_review.xlsx'
-    df_reviews = pd.read_excel('dataset/gmaps_review.xlsx')
-    # df_reviews.sort_values(by="record_no", ascending=False, inplace=True)    
+    # df_reviews = pd.read_excel('dataset/gmaps_review.xlsx')
+    # df_reviews.sort_values(by="record_no", ascending=False, inplace=True)
+    df_reviews = get_data_ulasan()
     
     # Filter df_reviews berdasarkan reviewer_id
     filtered_reviews = df_reviews[df_reviews['reviewer_id'].isin(reviewer_ids)]
@@ -475,9 +478,10 @@ def place_review():
     reviewer_ids = df['reviewer_id'].unique()
 
     # Baca dataset 'gmaps_review.xlsx'
-    df_reviews = pd.read_excel(dataset['file_ulasan'])
+    # df_reviews = pd.read_excel(dataset['file_ulasan'])
     # df_reviews.sort_values(by="record_no", ascending=False, inplace=True)    
-    
+    df_reviews = get_data_ulasan()
+
     # Filter df_reviews berdasarkan reviewer_id
     filtered_reviews = df_reviews[df_reviews['reviewer_id'].isin(reviewer_ids)]
     
@@ -690,7 +694,7 @@ def download_tbl_01():
 
 
 
-#============ list data ulasan pada fitur manajemen data
+#============ list data pengaduan pada fitur manajemen data
 @app.route('/entry_pengaduan')
 def entry_pengaduan():  
     # if 'user' not in session:
@@ -742,15 +746,17 @@ def detail_pengaduan():
     df_detail = df_detail.query("pengaduan_id == @pengaduan_id")
     detail = df_detail.to_dict(orient="records")
 
-    host = HOSTNAME
+    # host = HOSTNAME
+    hostname = create_hostname()
+
     key = data[0]['token']
-    LONG_URL = HOSTNAME+'/lacak_pengaduan?key='+key
+    LONG_URL = hostname+'/lacak_pengaduan?key='+key
     API_URL = f"http://tinyurl.com/api-create.php?url={LONG_URL}"
     response = requests.get(API_URL)
     SHORT_URL = response.text
 
     print (COBA_HOST)
-    print (HOSTNAME)
+    print (hostname)
 
     return render_template("detail_pengaduan.html", data=data, detail=detail, host=host, LONG_URL=LONG_URL, SHORT_URL=SHORT_URL)
 
@@ -1185,6 +1191,7 @@ def hapus_ulasan():
         # Hapus data dari file Excel dan gambar
         delete_row_by_record_no(record_no)
         result_message = delete_image(reviewer_id)
+        predict_ulasan()
 
         # Flash pesan sukses
         flash(f"Ulasan dengan record_no {record_no} berhasil dihapus. {result_message}", "success")
@@ -1196,6 +1203,167 @@ def hapus_ulasan():
         flash(f"Terjadi kesalahan: {str(e)}", "danger")
     # Redirect kembali ke halaman utama
     return redirect(url_for('reviews'))
+
+@app.route('/scrappingdog')
+def scrappingdog():
+    # halaman untuk menyimpan ulasan hasil scrapping secara otomatis
+    record_no = get_last_record()
+    print(record_no)
+    
+    data_scrap = get_data_scrap()
+    # reverse data untuk mengurutkan pengentrian data dari data terlama
+    data_scrap.reverse()
+    x = 1
+    for item in data_scrap:
+        record_no = record_no + x
+        reviewer_id = item['reviewer_id']
+        name = item['name']
+        link = item['link']
+        thumbnail = item['thumbnail']
+        reviews = item['reviews']
+        photos = item['photos']
+        localGuide = item['local_guide']
+        if localGuide is True:
+            localGuide = 'TRUE'
+            levelGuide = -9999
+        else:
+            localGuide = 'FALSE'
+            levelGuide = 0
+        rating = item['rating']
+        duration = ''
+        tgl_entry = item['tgl_entry']
+        tgl_ulasan = item['date']
+        snippet = item['snippet']
+        fixed_review = snippet
+        likes = item['likes']
+        images = ''
+        response_from_owner = ''
+        thn_ulasan = item['year']
+        
+        # Simpan ke database
+        # persiapkan data
+        data_ulasan = {
+            "record_no": record_no,
+            "reviewer_id": reviewer_id,
+            "name": name,
+            "link": link,
+            "thumbnail": thumbnail,
+            "reviews": reviews,
+            "photos": photos,
+            "localGuide": localGuide,
+            "levelGuide": levelGuide,
+            "rating": rating,
+            "duration": duration,
+            "tgl_entry": tgl_entry,
+            "tgl_ulasan": tgl_ulasan,
+            "snippet": snippet,
+            "fixed_review": fixed_review,
+            "likes": likes,
+            "images": images,
+            "response_from_owner": response_from_owner,
+            "thn_ulasan": thn_ulasan
+        }    
+        query_ulasan = text("""
+                INSERT INTO ulasan (
+                    record_no, reviewer_id, name, link, thumbnail, reviews, photos, localGuide, levelGuide, rating, duration, tgl_entry,
+                    tgl_ulasan, snippet, fixed_review, likes, images, response_from_owner, thn_ulasan
+                ) VALUES (
+                    :record_no, :reviewer_id, :name, :link, :thumbnail, :reviews, :photos, :localGuide, :levelGuide, :rating, :duration, :tgl_entry,
+                    :tgl_ulasan, :snippet, :fixed_review, :likes, :images, :response_from_owner, :thn_ulasan
+                )
+            """) 
+        # Eksekusi perintah mysql       
+        # Gunakan transaksi eksplisit
+        with engine.connect() as connection:
+            with connection.begin():  # Pastikan transaksi dikomit
+                connection.execute(query_ulasan, data_ulasan)
+                print("Data berhasil ditambahkan dan diupdate.")        
+        # prediksi ulasan
+        predict_ulasan()
+        print (record_no, reviewer_id, thumbnail)
+        download_thumbnail(reviewer_id, thumbnail)
+        x+1
+    # return data_scrap
+    return redirect('/entry_ulasan')
+
+def get_data_scrap():
+    # Fungsi untuk mengambil hasil scrapping
+    # proses dilakukan sampai ditemukan reviewer_id yang sama dari tabel ulasan
+    # hasil = cek_reviewer_id('113602239649837536646')
+    data_reviews = []
+    next_token = ''
+    while True:
+        data = get_google_reviews(next_token)
+        next_token = data.get("pagination", {}).get("next_page_token")
+        reviews = data.get("reviews_results", [])
+        for x in reviews:
+            contributor_id = x['user']['contributor_id']
+            name =  x['user']['name']
+            link = x['user']['link']
+            thumbnail = x['user']['thumbnail']
+            reviews = x['user']['reviews']
+            photos = x['user']['photos']
+            local_guide = x['user']['local_guide']
+            rating = x['rating']
+            iso_date = x['iso_date']
+            dt = datetime.strptime(iso_date, "%Y-%m-%dT%H:%M:%S.%fZ")
+            # format ulang time
+            formatted_dt = dt.strftime("%Y-%m-%d %H:%M:%S")
+            year = dt.strftime("%Y")            
+            snippet = x.get('snippet','')
+            likes = x['likes']
+            now = datetime.now()
+            tgl_entry = now.strftime("%Y-%m-%d %H:%M:%S")
+            cek_id = cek_reviewer_id(contributor_id)
+            if cek_id is False:
+                # print (contributor_id)
+                # tambahkan ke list
+                data_reviews.append({
+                    'reviewer_id' : contributor_id,
+                    'name' : name,
+                    'link' : link,
+                    'thumbnail' : thumbnail,
+                    'reviews' : reviews,
+                    'photos' : photos,
+                    'local_guide' : local_guide,
+                    'rating' : rating,
+                    'date' : formatted_dt,
+                    'year' : year,
+                    'tgl_entry' : tgl_entry,
+                    'snippet' : snippet,
+                    'likes' : likes
+                    })  
+            else:
+                print('stop')
+                return data_reviews
+        # print(next_token)
+    
+def cek_reviewer_id(id):
+    # cek apakah ulasan dengan reviewer_id sudah ada apa belum di tabel ulasan
+    # jika ada => True
+    # Else => False
+    with engine.connect() as connection:
+        query = text("SELECT 1 FROM ulasan WHERE reviewer_id = :id LIMIT 1")
+        result = connection.execute(query, {"id": id}).fetchone()
+    return result is not None
+
+def download_thumbnail(reviewer_id,thumbnail):
+    # Mengunduh thumbnail dan menyimpan dengan nama reviewer_id.jpg
+    output_folder = 'static/reviewer_thumbnail'
+    # if thumbnail is None or thumbnail == "":
+    #     thumbnail = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqDShlwPIXpZeHVOlDLQ8MrkAY3TDZr2OxCg&s'
+    response = requests.get(thumbnail, stream=True)
+    if response.status_code == 200:
+        # Simpan file menggunakan reviewer_id sebagai nama file
+        file_name = os.path.join(output_folder, f'{reviewer_id}.jpg')
+        with open(file_name, 'wb') as f:
+            f.write(response.content)
+            print(f"Thumbnail untuk reviewer_id {reviewer_id} berhasil diunduh.")
+    else:
+        print(f"Thumbnail untuk reviewer_id {reviewer_id} gagal diunduh. Status code: {response.status_code}")
+
+
+#=================================== End Manajemen Ulasan ============================================#
 
 @app.route('/about')
 def about():
