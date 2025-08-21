@@ -751,7 +751,7 @@ def detail_pengaduan():
 
     key = data[0]['token']
     LONG_URL = hostname+'/lacak_pengaduan?key='+key
-    API_URL = f"http://tinyurl.com/api-create.php?url={LONG_URL}"
+    API_URL = f"https://tinyurl.com/api-create.php?url={LONG_URL}"
     response = requests.get(API_URL)
     SHORT_URL = response.text
 
