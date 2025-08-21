@@ -751,11 +751,12 @@ def detail_pengaduan():
 
     key = data[0]['token']
     LONG_URL = hostname+'/lacak_pengaduan?key='+key
-    API_URL = f"https://tinyurl.com/api-create.php?url={LONG_URL}"
-    response = requests.get(API_URL)
-    SHORT_URL = response.text
+    # API_URL = f"https://tinyurl.com/api-create.php?url={LONG_URL}"
+    # response = requests.get(API_URL)
+    # SHORT_URL = response.text
+    SHORT_URL = ''
 
-    print (COBA_HOST)
+    # print (COBA_HOST)
     print (hostname)
 
     return render_template("detail_pengaduan.html", data=data, detail=detail, host=host, LONG_URL=LONG_URL, SHORT_URL=SHORT_URL)
