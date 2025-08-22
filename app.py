@@ -989,7 +989,26 @@ def form_penyelesaian_pengaduan():
     df = df.query("pengaduan_id == @pengaduan_id")
     data = df.to_dict(orient="records")
 
-    return render_template('form_penyelesaian_pengaduan.html', data=data)
+    isi_pengaduan = data[0]['isi_pengaduan']
+    print(isi_pengaduan)
+
+    pengaduan_similar = cari_rekomendasi(isi_pengaduan)
+    pengaduan_similar = pengaduan_similar.to_dict(orient="records")
+    print(pengaduan_similar[0]['pengaduan'])
+
+    return render_template('form_penyelesaian_pengaduan.html', data=data, pengaduan_similar=pengaduan_similar)
+
+@app.route('/rekomendasi')
+def rekomendasi():
+    # Input user
+    user_pengaduan = "parkiran kurang luas. sering tidak ada tempat parkir"
+    hasil = cari_rekomendasi(user_pengaduan)
+
+    # Ambil kolom penting saja
+    data = hasil.to_dict(orient="records")
+    print (data[0]['pengaduan'])
+
+    return jsonify(data)
 
 #====================================================
 

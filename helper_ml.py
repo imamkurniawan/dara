@@ -622,3 +622,40 @@ def transform_prediction_pengaduan():
     # Simpan hasil ke file baru
     df.to_csv(output_file, index=False)
     print(f"Transformasi selesai. Data disimpan di: {output_file}")
+
+
+# TF-IDF untuk kasus serupa
+def cari_rekomendasi(user_input: str) -> pd.DataFrame:
+    """
+    Cari rekomendasi solusi berdasarkan kemiripan teks pengaduan.
+    File Excel langsung dideklarasi di dalam fungsi.
+    
+    Parameters:
+        user_input (str): teks pengaduan dari user
+    
+    Returns:
+        pd.DataFrame: DataFrame berisi pengaduan, solusi, similarity (descending)
+    """
+    
+    # 1. Load dataset dari Excel (langsung deklarasi di sini)
+    file_xlsx = "dataset/kasus_pengaduan_dan_solusi.xlsx"
+    df = pd.read_excel(file_xlsx)
+
+    # 2. Buat model TF-IDF
+    vectorizer = TfidfVectorizer()
+    X = vectorizer.fit_transform(df['pengaduan'].astype(str))
+
+    # 3. Transform input user ke vektor
+    user_vec = vectorizer.transform([user_input])
+
+    # 4. Hitung cosine similarity
+    similarities = cosine_similarity(user_vec, X).flatten()
+
+    # 5. Buat dataframe hasil
+    hasil = df.copy()
+    hasil['similarity'] = similarities
+
+    # 6. Urutkan berdasarkan similarity (descending)
+    hasil = hasil.sort_values(by="similarity", ascending=False).reset_index(drop=True)
+
+    return hasil
